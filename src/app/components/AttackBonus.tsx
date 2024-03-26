@@ -7,7 +7,20 @@ const AttackBonus = () => {
     const { level, levelling, statsMap, setLevelling } = useContext(Context);
      const [attackBonus, setAttackBonus] = useState(0);
 
-     useEffect(() => {
+    const increaseAttackBonus = () => {
+        console.log('increase attack bonus');
+        const currentStats = statsMap.get(level);
+
+        if (currentStats) {
+            const newAttackBonus = attackBonus + 1;
+            currentStats.attackBonus = newAttackBonus;
+            setAttackBonus(newAttackBonus)
+        }
+
+        setLevelling(false);
+    };
+
+    useEffect(() => {
         const currentStats = statsMap.get(level);
 
         if (currentStats) {
@@ -16,10 +29,6 @@ const AttackBonus = () => {
         }
      }, [level, statsMap]);
 
-    const increaseAttackBonus = () => {
-        console.log('increase attack bonus');
-        setLevelling(false);
-    };
 
     return (
         <div className={styles.attackBonusDiv}>

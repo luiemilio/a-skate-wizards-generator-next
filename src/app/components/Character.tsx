@@ -34,7 +34,6 @@ const Character = () => {
             </div>
             <div className={styles.characterBottom}>
                 <RandoSpells></RandoSpells>
-                {/* <Items className={styles.randoSpells} section='Rando Spells' items={randoSpells}></Items> */}
                 <Items section='Bootleg Spells' items={bootlegSpells}></Items>
             </div>
         </div>

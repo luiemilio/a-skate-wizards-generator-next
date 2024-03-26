@@ -10,7 +10,6 @@ const RandoSpells = () => {
     const [randoSpells, setRandoSpells] = useState<Item[]>([]);
 
     const addRandoSpell = () => {
-        console.log('get rando spell');
         const randoSpell = getRandoSpell();
         const currentRandoSpells = randoSpells;
         currentRandoSpells.push(randoSpell);
