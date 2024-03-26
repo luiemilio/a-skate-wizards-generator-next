@@ -1,34 +1,41 @@
+'use client';
 import styles from '../page.module.css';
-import { CharacterContext } from '../page';
 import { useContext, useState, useEffect } from 'react';
 import Items from './Items';
 import Abilities from './Abilities';
+import { Context } from "../page";
+import RandoSpells from './RandoSpells';
+import { Item } from '../utils/utils';
 
 const Character = () => {
-    const [status, setStatus] = useState({} as any);
-    const levelMap = useContext(CharacterContext);
-    const currentLevel = levelMap.get('currentLevel');
-    const currentStats = levelMap.get(currentLevel);
+    const { level, levelling, setLevel, setLevelling, statsMap, setStatsMap  } = useContext(Context);
+    const [permSpells, setPermSpells] = useState<Item[]>([]);
+    const [items, setItems] = useState<Item[]>([]);
+    const [bootlegSpells, setBootlegSpells] = useState<Item[]>([]);
 
     useEffect(() => {
-        if (currentLevel) {
-            if (currentStats) {
-                const { abilityScores, permSpells, items, randoSpells, bootlegSpells } = currentStats;
-                setStatus({ abilityScores, permSpells, items, randoSpells, bootlegSpells });
-            }
+        const currentStats = statsMap.get(level);
+
+        if (currentStats) {
+            const { permSpells, items, bootlegSpells } = currentStats;
+
+            setPermSpells(permSpells);
+            setItems(items);
+            setBootlegSpells(bootlegSpells);
         }
-    }, [currentLevel, currentStats]);
+    }, [level, statsMap]);
 
     return (
         <div className={styles.character}>
             <div className={styles.characterTop}>
-                <Abilities abilityScores={status.abilityScores}></Abilities>
-                <Items className={styles.permanentSpells} section='Permanent Spells' items={status?.permSpells}></Items>
-                <Items className={styles.items} section='Items' items={status?.items}></Items>
+                <Abilities></Abilities>
+                <Items className={styles.permanentSpells} section='Permanent Spells' items={permSpells}></Items>
+                <Items className={styles.items} section='Items' items={items}></Items>
             </div>
             <div className={styles.characterBottom}>
-                <Items className={styles.randoSpells} section='Rando Spell' items={status?.randoSpells}></Items>
-                <Items section='Bootleg Spells' items={status?.bootlegSpells}></Items>
+                <RandoSpells></RandoSpells>
+                {/* <Items className={styles.randoSpells} section='Rando Spells' items={randoSpells}></Items> */}
+                <Items section='Bootleg Spells' items={bootlegSpells}></Items>
             </div>
         </div>
     )

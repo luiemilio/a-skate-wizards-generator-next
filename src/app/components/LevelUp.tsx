@@ -1,13 +1,32 @@
 import styles from '../page.module.css';
-import { CharacterContext } from '../page';
-import { useContext } from 'react';
+import { Context } from '../page';
+import { useContext, useEffect } from 'react';
+import { LevelUpButton, LevelDownButton } from './Buttons';
 
 const LevelUp = () => {
+    const { level, levelling, setLevel, setLevelling  } = useContext(Context);
+    
+    const levelDown = () => {
+        if (level > 1) {
+            console.log('setting level: ', level - 1);
+            setLevel(level - 1);
+            setLevelling(true);
+        }
+    };
+
+    const levelUp = () => {
+        if (level < 7) {
+            console.log('setting level: ', level + 1);
+            setLevel(level + 1);
+            setLevelling(true);
+        }
+    };
+
     return (
         <div className={styles.levelUp}>
-            <div className={styles.button}>-</div>
-            <div> Level Up</div>
-            <div className={styles.button}>+</div>
+            <LevelDownButton onClick={levelDown} disabled={levelling}></LevelDownButton>
+            <div>Level {level}</div>
+            <LevelUpButton onClick={levelUp} disabled={levelling}></LevelUpButton>
         </div>
     )
 };

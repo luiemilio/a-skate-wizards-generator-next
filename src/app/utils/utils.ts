@@ -105,7 +105,7 @@ export const getRandoSpell = (): Item => {
     );
 
     return {
-        name
+        name,
     };
 };
 
@@ -156,10 +156,8 @@ export const getInitialStatus = (): any => {
         randoSpells: [randoSpell],
         bootlegSpells: [bootlegSpell],
         permSpells: PERMANENT_SPELLS,
-        items,
+        items
     });
-
-    levelMap.set('currentLevel', 1);
 
     return levelMap;
 };

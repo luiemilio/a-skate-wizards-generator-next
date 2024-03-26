@@ -30,7 +30,6 @@
     border-radius: 4px;
     text-align: center;
     padding: 8px;
-    width: fit-content;
 }
 
 .levelUp {
@@ -73,7 +72,7 @@
 }
 
 .itemName {
-
+    font-weight: 600;
 }
 
 .abilities {
@@ -113,4 +112,52 @@
     @media all and (max-width: 899px) {
         border-right: 0px solid black;
     }
+}
+
+.randoSpellsHeader {
+    display: flex;
+}
+
+.attackBonusDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+}
+
+.abilitiesDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ability {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+}
+
+.score {
+    display: flex;
+    justify-content: space-between;
+    width: 70px;
+}
+
+.levellingButton {
+    padding: 0px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+}
+
+
+.off { 
+    background-color: white;
+    color: white;
+    pointer-events: none;
+}
+
+.on {
+    display: flex;
 }
