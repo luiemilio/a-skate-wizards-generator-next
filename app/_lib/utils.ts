@@ -1,10 +1,12 @@
+import { createContext, Dispatch, SetStateAction } from 'react';
+import localFont from 'next/font/local';
 import {
     ITEMS,
     RANDO_SPELLS,
     BOOTLEG_SPELLS,
     STARTING_STATS,
-    PERMANENT_SPELLS,
-} from "./constants";
+    PERMANENT_SPELLS
+} from './constants';
 
 export type Item = {
     uuid?: string;
@@ -42,13 +44,53 @@ export type InfoBoxes = {
     updateStatus: (status: Status) => void;
 };
 
+interface Stats {
+    hp: number;
+    defense: number;
+    attackBonus: number;
+    abilityScores: {
+        strength: number;
+        dexterity: number;
+        will: number;
+    };
+    randoSpells: Item[];
+    bootlegSpells: Item[];
+    permSpells: Item[];
+    equipment: Item[];
+}
+
+export interface CharacterContext {
+    statsMap: Map<number, Stats>;
+    setStatsMap: Dispatch<SetStateAction<Map<number, Stats>>>;
+    level: number;
+    setLevel: Dispatch<SetStateAction<number>>;
+    levelling: boolean;
+    setLevelling: Dispatch<SetStateAction<boolean>>;
+}
+
 export type StatusOptions = Partial<Status>;
+
+export const CharacterContext = createContext({
+    statsMap: new Map(),
+    setStatsMap: () => {},
+    level: 0,
+    setLevel: () => {},
+    levelling: false,
+    setLevelling: () => {}
+} as CharacterContext);
+
+export const textFont = localFont({
+    src: '../_assets/fonts/HyningsHandwritingV2-Regular.ttf'
+});
+export const titleFont = localFont({
+    src: '../_assets/fonts/gomarice_marker2.ttf'
+});
 
 export const convertObjToItems = (obj: any): Item[] => {
     return Object.entries(obj).map(([key, value]) => {
         return {
             name: normalizePropName(key),
-            description: `${value}`,
+            description: `${value}`
         };
     });
 };
@@ -64,7 +106,7 @@ export const getAbilityScores = () => {
         [1, 2, 0],
         [0, 2, 1],
         [1, 0, 2],
-        [0, 1, 2],
+        [0, 1, 2]
     ];
 
     const abilities = getRandomElement(abilityScores) as number[];
@@ -72,7 +114,7 @@ export const getAbilityScores = () => {
     return {
         strength: abilities[0],
         dexterity: abilities[1],
-        will: abilities[2],
+        will: abilities[2]
     };
 };
 
@@ -81,31 +123,31 @@ export const getAbilityScoreAsItems = () => {
     return convertObjToItems(abilityScores);
 };
 
-export const getItems = (): Item[] => {
-    const selectedItems: Item[] = [];
+export const getEquipment = (): Item[] => {
+    const selectedEquipment: Item[] = [];
 
-    while (selectedItems.length < 3) {
+    while (selectedEquipment.length < 3) {
         const rolledItem = getRandomElement(ITEMS) as Item;
 
         if (
-            !selectedItems.some(
+            !selectedEquipment.some(
                 (selectedItem) => selectedItem.name === rolledItem.name
             )
         ) {
-            selectedItems.push(rolledItem);
+            selectedEquipment.push(rolledItem);
         }
     }
 
-    return selectedItems;
+    return selectedEquipment;
 };
 
 export const getRandoSpell = (): Item => {
-    const name = RANDO_SPELLS.map((wordList) => getRandomElement(wordList)).join(
-        " "
-    );
+    const name = RANDO_SPELLS.map((wordList) =>
+        getRandomElement(wordList)
+    ).join(' ');
 
     return {
-        name,
+        name
     };
 };
 
@@ -118,7 +160,7 @@ const normalizePropName = (str: string): string => {
         return str.toUpperCase();
     }
 
-    let finalWord = "";
+    let finalWord = '';
 
     for (let i = 0; i < str.length; i++) {
         const letter = str.charAt(i);
@@ -144,7 +186,7 @@ export const getInitialStatus = (): any => {
     const abilityScores = getAbilityScores();
     const randoSpell = getRandoSpell();
     const bootlegSpell = getBootlegSpell();
-    const items = getItems();
+    const equipment = getEquipment();
 
     const levelMap = new Map();
 
@@ -156,7 +198,7 @@ export const getInitialStatus = (): any => {
         randoSpells: [randoSpell],
         bootlegSpells: [bootlegSpell],
         permSpells: PERMANENT_SPELLS,
-        items
+        equipment
     });
 
     return levelMap;

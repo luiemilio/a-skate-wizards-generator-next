@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import minus from '../../../assets/minus.svg';
-import plus from '../../../assets/plus.svg';
+import minus from '../_assets/minus.svg';
+import plus from '../_assets/plus.svg';
 import Image from "next/image";
 
 const Button = styled.button<{ $hidden?: boolean, $disabled?: boolean }>`

@@ -1,12 +1,36 @@
 import { useContext, useEffect, useState } from 'react';
-import styles from '../page.module.css';
 import { LevelUpButton } from './Buttons';
-import { Context } from '../page';
-import { Item, getRandoSpell } from '../utils/utils';
+import { CharacterContext } from '../_lib/utils';
+import { Item, getRandoSpell } from '../_lib/utils';
+import styled from 'styled-components';
+import { SectionName } from './Character';
+import Items from './Items';
+
+const RandoSpellsDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 350px;
+    max-width: 650px;
+    border-right: 1px solid black;
+
+    @media all and (max-width: 1049px) {
+        border-bottom: 1px solid black;
+    }
+
+    @media all and (max-width: 899px) {
+        border-right: 0px solid black;
+    }
+`;
+
+const Header = styled.div`
+    display: flex;
+    justify-content: center;
+`;
 
 const RandoSpells = () => {
     const { level, levelling, setLevel, setLevelling, statsMap, setStatsMap } =
-        useContext(Context);
+        useContext(CharacterContext);
     const [randoSpells, setRandoSpells] = useState<Item[]>([]);
 
     const addRandoSpell = () => {
@@ -28,24 +52,17 @@ const RandoSpells = () => {
     }, [level, statsMap]);
 
     return (
-        <div className={`${styles.characterSection} ${randoSpells}`}>
-            <div className={`${styles.randoSpellsHeader}`}>
-                <div className={`${styles.sectionName}`}>{'Rando Spells'}</div>
+        <RandoSpellsDiv>
+            <Header>
+                <SectionName>Rando Spells</SectionName>
                 <LevelUpButton
                     onClick={addRandoSpell}
                     hidden={!levelling || level === 1 || level % 2 === 0}
                     disabled={!levelling || level === 1 || level % 2 === 0}
                 ></LevelUpButton>
-            </div>
-            {randoSpells?.map((item: any) => {
-                return (
-                    <div key={item.name}>
-                        <div className={styles.itemName}>{item.name}</div>
-                        <div>{item.description}</div>
-                    </div>
-                );
-            })}
-        </div>
+            </Header>
+            <Items items={randoSpells}></Items>
+        </RandoSpellsDiv>
     );
 };
 
