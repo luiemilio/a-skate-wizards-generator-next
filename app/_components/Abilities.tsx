@@ -9,6 +9,7 @@ import { ItemName } from './Items';
 type Ability = 'strength' | 'dexterity' | 'will';
 
 const AbilitiesDiv = styled.div`
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     height: 350px;

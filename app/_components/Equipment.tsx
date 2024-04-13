@@ -5,16 +5,15 @@ import styled from 'styled-components';
 import { SectionName } from './Character';
 
 const EquipmentDiv = styled.div`
-display: flex;
-flex-direction: column;
-height: 350px;
-width: 450px;
-border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    width: 450px;
+    border-bottom: 1px solid black;
 `;
 
 export const Equipment = () => {
-    const { level, levelling, setLevel, setLevelling, statsMap, setStatsMap } =
-        useContext(CharacterContext);
+    const { level, statsMap } = useContext(CharacterContext);
     const [equipment, setEquipment] = useState<Item[]>([]);
 
     useEffect(() => {

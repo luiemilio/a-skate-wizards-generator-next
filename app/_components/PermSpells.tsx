@@ -5,6 +5,7 @@ import { SectionName } from './Character';
 import styled from 'styled-components';
 
 const PermSpellsDiv = styled.div`
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     height: 350px;

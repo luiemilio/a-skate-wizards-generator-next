@@ -6,9 +6,9 @@ import styled from 'styled-components';
 
 const AttackBonusDiv = styled.div`
     display: flex;
-    justify-content: space-between;
+    gap: 5px;
+    width: 166px;
     align-items: center;
-    width: 150px;
 `;
 
 const AttackBonus = () => {
