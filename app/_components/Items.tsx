@@ -3,8 +3,6 @@ import styled from 'styled-components';
 const ItemsDiv = styled.div`
     display: flex;
     flex-direction: column;
-    height: 350px;
-    width: 450px;
 `;
 
 export const ItemName = styled.div`

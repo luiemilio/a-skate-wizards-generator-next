@@ -13,18 +13,18 @@ const EquipmentDiv = styled.div`
 `;
 
 export const Equipment = () => {
-    const { level, statsMap } = useContext(CharacterContext);
+    const { level, levelHistory } = useContext(CharacterContext);
     const [equipment, setEquipment] = useState<Item[]>([]);
 
     useEffect(() => {
-        const currentStats = statsMap.get(level);
+        const currentStats = levelHistory.get(level);
 
         if (currentStats) {
             const { equipment } = currentStats;
 
             setEquipment(equipment);
         }
-    }, [level, statsMap]);
+    }, [level, levelHistory]);
 
     return (
         <EquipmentDiv>

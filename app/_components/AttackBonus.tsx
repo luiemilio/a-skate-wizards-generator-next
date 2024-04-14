@@ -7,36 +7,34 @@ import styled from 'styled-components';
 const AttackBonusDiv = styled.div`
     display: flex;
     gap: 5px;
-    width: 166px;
+    width: 200px;
     align-items: center;
 `;
 
 const AttackBonus = () => {
-    const { level, levelling, statsMap, setLevelling } =
+    const { level, levelling, levelHistory, setLevelling, updateLevelHistory } =
         useContext(CharacterContext);
+
     const [attackBonus, setAttackBonus] = useState(0);
 
     const increaseAttackBonus = () => {
-        console.log('increase attack bonus');
-        const currentStats = statsMap.get(level);
+        const stats = levelHistory.get(level);
 
-        if (currentStats) {
-            const newAttackBonus = attackBonus + 1;
-            currentStats.attackBonus = newAttackBonus;
-            setAttackBonus(newAttackBonus);
+        if (stats) {
+            updateLevelHistory(level, { ...stats, attackBonus: attackBonus + 1 })
         }
 
         setLevelling(false);
     };
 
     useEffect(() => {
-        const currentStats = statsMap.get(level);
+        const stats = levelHistory.get(level);
 
-        if (currentStats) {
-            const { attackBonus } = currentStats;
+        if (stats) {
+            const { attackBonus } = stats;
             setAttackBonus(attackBonus);
         }
-    }, [level, statsMap]);
+    }, [level, levelHistory]);
 
     return (
         <AttackBonusDiv>

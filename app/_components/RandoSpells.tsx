@@ -9,9 +9,8 @@ import Items from './Items';
 const RandoSpellsDiv = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
     height: 350px;
-    max-width: 650px;
+    width: 450px;
     border-right: 1px solid black;
 
     @media all and (max-width: 1049px) {
@@ -26,30 +25,38 @@ const RandoSpellsDiv = styled.div`
 const Header = styled.div`
     display: flex;
     justify-content: center;
+    align-self: center;
+    width: 200px;
+`;
+
+const RandoSpellsList = styled(Items)`
+    justify-content: center;
 `;
 
 const RandoSpells = () => {
-    const { level, levelling, setLevel, setLevelling, statsMap, setStatsMap } =
+    const { level, levelling, setLevelling, levelHistory, updateLevelHistory } =
         useContext(CharacterContext);
+    
     const [randoSpells, setRandoSpells] = useState<Item[]>([]);
 
     const addRandoSpell = () => {
-        const randoSpell = getRandoSpell();
-        const currentRandoSpells = randoSpells;
-        currentRandoSpells.push(randoSpell);
-        setRandoSpells(currentRandoSpells);
+        const stats = levelHistory.get(level);
+
+        if (stats) {
+            updateLevelHistory(level, { ...stats, randoSpells: [...randoSpells, getRandoSpell()] })
+        }
+
         setLevelling(false);
     };
 
     useEffect(() => {
-        const currentStats = statsMap.get(level);
+        const stats = levelHistory.get(level);
 
-        if (currentStats) {
-            const { randoSpells } = currentStats;
-
+        if (stats) {
+            const { randoSpells } = stats;
             setRandoSpells(randoSpells);
         }
-    }, [level, statsMap]);
+    }, [level, levelHistory]);
 
     return (
         <RandoSpellsDiv>
@@ -61,7 +68,7 @@ const RandoSpells = () => {
                     disabled={!levelling || level === 1 || level % 2 === 0}
                 ></LevelUpButton>
             </Header>
-            <Items items={randoSpells}></Items>
+            <RandoSpellsList items={randoSpells}></RandoSpellsList>
         </RandoSpellsDiv>
     );
 };

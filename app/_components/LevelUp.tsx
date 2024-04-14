@@ -1,25 +1,26 @@
-import styles from '../page.module.css';
 import { CharacterContext } from '../_lib/utils';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { LevelUpButton, LevelDownButton } from './Buttons';
 import styled from 'styled-components';
 
 const LevelUpDiv = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    width: 120px;
     gap: 5px;
 `;
 
 const LevelUp = () => {
-    const { level, levelling, setLevel, setLevelling, statsMap, setStatsMap } =
+    const { level, levelling, setLevel, setLevelling, levelHistory, updateLevelHistory } =
         useContext(CharacterContext);
 
     const levelDown = () => {
         if (level > 1) {
-            console.log('setting level: ', level - 1);
-            setLevel(level - 1);
-            setLevelling(true);
+            const newLevel = level - 1;
+            console.log('setting level: ', newLevel);
+            levelHistory.delete(level);
+            setLevel(newLevel);
         }
     };
 
@@ -27,15 +28,15 @@ const LevelUp = () => {
         if (level < 7) {
             const newLevel = level + 1;
             console.log('setting level: ', newLevel);
-            const currentStats = statsMap.get(level);
+            const currentStats = levelHistory.get(level);
 
             if (currentStats) {
-                const newStats = { ...currentStats, hp: currentStats.hp + 2 };
-                statsMap.set(newLevel, newStats);
+               const newStats = { ...currentStats, hp: currentStats.hp + 2 };
+                updateLevelHistory(newLevel, newStats);
             }
 
+            setLevel(newLevel);
             setLevelling(true);
-            setLevel(level + 1);
         }
     };
 

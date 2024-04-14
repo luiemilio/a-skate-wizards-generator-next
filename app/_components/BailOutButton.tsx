@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CharacterContext, getInitialStatus, textFont } from '../_lib/utils';
+import { CharacterContext, getRandomStats, textFont } from '../_lib/utils';
 import { useContext } from 'react';
 
 const BailOutButton = styled.button`
@@ -13,11 +13,12 @@ const BailOutButton = styled.button`
 `;
 
 const BailOut = () => {
-    const { setStatsMap, setLevel } = useContext(CharacterContext);
+    const { updateLevelHistory, setLevel } = useContext(CharacterContext);
 
     const bailOut = () => {
-        setStatsMap(getInitialStatus());
         setLevel(1);
+        const initialStats = getRandomStats();
+        updateLevelHistory(1, initialStats);
     }
 
     return (

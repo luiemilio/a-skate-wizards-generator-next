@@ -12,19 +12,19 @@ const BootLegSpellsDiv = styled.div`
 `;
 
 const BootlegSpells = () => {
-    const { level, levelling, setLevel, setLevelling, statsMap, setStatsMap } =
+    const { level, levelling, setLevel, setLevelling, levelHistory, setlevelHistory } =
         useContext(CharacterContext);
     const [bootlegSpells, setBootlegSpells] = useState<Item[]>([]);
 
     useEffect(() => {
-        const currentStats = statsMap.get(level);
+        const currentStats = levelHistory.get(level);
 
         if (currentStats) {
             const { bootlegSpells } = currentStats;
 
             setBootlegSpells(bootlegSpells);
         }
-    }, [level, statsMap]);
+    }, [level, levelHistory]);
 
     return (
         <BootLegSpellsDiv>

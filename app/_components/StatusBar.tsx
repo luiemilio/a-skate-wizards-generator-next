@@ -1,6 +1,5 @@
 'use client';
 import { useContext, useEffect, useState } from 'react';
-import styles from '../page.module.css';
 import LevelUp from './LevelUp';
 import AttackBonus from './AttackBonus';
 import { CharacterContext } from '../_lib/utils';
@@ -14,28 +13,44 @@ const StatusDiv = styled.div`
     padding-bottom: 16px;
     margin-bottom: -20px;
     width: 100%;
+    min-width: 450px;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
 `;
 
+const HpDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 52px;
+`;
+
+const DefenseDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 90px;
+`
+
 const StatusBar = () => {
-    const [stats, setStats] = useState({ hp: 0, defense: 0, attackBonus: 0 });
-    const { statsMap, level, levelling } = useContext(CharacterContext);
+    const { levelHistory, level, levelling } = useContext(CharacterContext);
+    const [hp, setHp] = useState(0);
+    const [defense, setDefense] = useState(0);
 
     useEffect(() => {
-        const currentStats = statsMap.get(level);
+        const stats = levelHistory.get(level);
 
-        if (currentStats) {
-            const { hp, defense, attackBonus } = currentStats;
-            setStats({ hp, defense, attackBonus });
+        if (stats) {
+            const { hp, defense } = stats;
+            
+            setHp(hp);
+            setDefense(defense);
         }
-    }, [level, statsMap, levelling]);
+    }, [level, levelHistory, levelling]);
 
     return (
         <StatusDiv>
             <LevelUp></LevelUp>
-            <div>{`HP: ${stats?.hp}`}</div>
-            <div>{`Defense: ${stats?.defense}`}</div>
+            <HpDiv>{`HP: ${hp}`}</HpDiv>
+            <DefenseDiv>{`Defense: ${defense}`}</DefenseDiv>
             <AttackBonus></AttackBonus>
         </StatusDiv>
     );

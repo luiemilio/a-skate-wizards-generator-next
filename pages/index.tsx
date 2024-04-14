@@ -1,8 +1,9 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
     CharacterContext,
-    getInitialStatus,
+    Stats,
+    getRandomStats,
     textFont,
     titleFont
 } from '../app/_lib/utils';
@@ -27,19 +28,25 @@ const Title = styled.div`
 `;
 
 const Generator = () => {
-    const [statsMap, setStatsMap] = useState(new Map());
+    const [levelHistory, setLevelHistory] = useState(new Map());
     const [level, setLevel] = useState(1);
     const [levelling, setLevelling] = useState(false);
 
+    const updateLevelHistory = (level: number, stats: Stats) => {
+        setLevelHistory(new Map(levelHistory.set(level, stats)));
+    };
+
     useEffect(() => {
-        setStatsMap(getInitialStatus());
+        const initialStats = getRandomStats();
+        const initialLevelMap = new Map([[1, initialStats]]);
+        setLevelHistory(initialLevelMap);
     }, []);
 
     return (
         <CharacterContext.Provider
             value={{
-                statsMap,
-                setStatsMap,
+                levelHistory,
+                updateLevelHistory,
                 level,
                 setLevel,
                 levelling,

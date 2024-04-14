@@ -23,19 +23,17 @@ const PermSpellsDiv = styled.div`
 `;
 
 const PermSpells = () => {
-    const { level, levelling, setLevel, setLevelling, statsMap, setStatsMap } =
-        useContext(CharacterContext);
+    const { level, levelHistory } = useContext(CharacterContext);
     const [permSpells, setPermSpells] = useState<Item[]>([]);
 
     useEffect(() => {
-        const currentStats = statsMap.get(level);
+        const stats = levelHistory.get(level);
 
-        if (currentStats) {
-            const { permSpells } = currentStats;
-
+        if (stats) {
+            const { permSpells } = stats;
             setPermSpells(permSpells);
         }
-    }, [level, statsMap]);
+    }, [level, levelHistory]);
 
     return (
         <PermSpellsDiv>

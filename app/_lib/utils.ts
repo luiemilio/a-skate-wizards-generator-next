@@ -44,7 +44,7 @@ export type InfoBoxes = {
     updateStatus: (status: Status) => void;
 };
 
-interface Stats {
+export interface Stats {
     hp: number;
     defense: number;
     attackBonus: number;
@@ -60,8 +60,8 @@ interface Stats {
 }
 
 export interface CharacterContext {
-    statsMap: Map<number, Stats>;
-    setStatsMap: Dispatch<SetStateAction<Map<number, Stats>>>;
+    levelHistory: Map<number, Stats>;
+    updateLevelHistory: (level: number, stats: Stats) => void
     level: number;
     setLevel: Dispatch<SetStateAction<number>>;
     levelling: boolean;
@@ -71,12 +71,13 @@ export interface CharacterContext {
 export type StatusOptions = Partial<Status>;
 
 export const CharacterContext = createContext({
-    statsMap: new Map(),
-    setStatsMap: () => {},
+    levelHistory: new Map(),
+    updateLevelHistory: () => {},
     level: 0,
     setLevel: () => {},
     levelling: false,
-    setLevelling: () => {}
+    setLevelling: () => {},
+    stats: {}
 } as CharacterContext);
 
 export const textFont = localFont({
@@ -181,16 +182,14 @@ export const getStartingStatsAsItems = () => {
     return convertObjToItems(STARTING_STATS);
 };
 
-export const getInitialStatus = (): any => {
+export const getRandomStats = (): Stats => {
     const { hp, defense, attackBonus } = STARTING_STATS;
     const abilityScores = getAbilityScores();
     const randoSpell = getRandoSpell();
     const bootlegSpell = getBootlegSpell();
     const equipment = getEquipment();
 
-    const levelMap = new Map();
-
-    levelMap.set(1, {
+    return {
         hp,
         defense,
         attackBonus,
@@ -199,9 +198,7 @@ export const getInitialStatus = (): any => {
         bootlegSpells: [bootlegSpell],
         permSpells: PERMANENT_SPELLS,
         equipment
-    });
-
-    return levelMap;
+    };
 };
 
 export const generateRandomKey = (): string => {

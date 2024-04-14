@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
-// import styles from "../page.module.css";
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { LevelUpButton } from './Buttons';
 import { CharacterContext } from '../_lib/utils';
 import styled from 'styled-components';
@@ -41,68 +40,71 @@ const Score = styled.div`
     width: 70px;
 `;
 
-const Abilities = () => {
-    const { level, levelling, setLevelling, statsMap } =
+const ScoreDiv = ({ ability }: { ability: Ability }) => {
+    const { level, levelling, setLevelling, levelHistory, updateLevelHistory } =
         useContext(CharacterContext);
-    const [abilityScores, setAbilityScores] = useState({
-        strength: 0,
-        dexterity: 0,
-        will: 0
-    });
 
-    const handleButtonClick = (ability: Ability) => {
-        const currentAbilityScores = abilityScores;
-        currentAbilityScores[ability] = currentAbilityScores[ability] + 1;
-        const currentStats = statsMap.get(level);
+    const getScore = useCallback(() => {
+        const stats = levelHistory.get(level);
 
-        if (currentStats) {
-            currentStats.abilityScores = currentAbilityScores;
+        if (!stats) {
+            return 0;
+        }
+
+        const { abilityScores } = stats;
+        return abilityScores[ability];
+    }, [ability, level, levelHistory]);
+
+    const [score, setScore] = useState(0);
+
+    const handleButtonClick = () => {
+        const newScore = score + 1;
+        const stats = levelHistory.get(level);
+
+        if (stats) {
+            const { abilityScores } = stats;
+            const newAbilityScores = { ...abilityScores, [ability]: newScore };
+            const newStats = { ...stats, abilityScores: { ...newAbilityScores } };
+            updateLevelHistory(level, newStats);
         }
 
         setLevelling(false);
     };
 
     useEffect(() => {
-        const currentStats = statsMap.get(level);
+        setScore(getScore());
+    }, [getScore]);
 
-        if (currentStats) {
-            const { abilityScores } = currentStats;
+    return (
+        <Score>
+            <div>{score}</div>
+            <LevelUpButton
+                onClick={handleButtonClick}
+                hidden={!levelling || level === 1 || level % 2 !== 0}
+                disabled={!levelling || level === 1 || level % 2 !== 0}
+            ></LevelUpButton>
+        </Score>
+    );
+};
 
-            setAbilityScores(abilityScores);
-        }
-    }, [level, statsMap]);
-
-    const getAbilityScores = () => {
-        if (abilityScores) {
-            return Object.entries(abilityScores).map(([ability, score]) => {
-                return (
-                    <Ability key={ability}>
-                        <ItemName>{`${ability}`.toLocaleUpperCase()}</ItemName>
-
-                        <Score>
-                            <div>{`${score}`}</div>
-                            <LevelUpButton
-                                onClick={() =>
-                                    handleButtonClick(ability as Ability)
-                                }
-                                hidden={
-                                    !levelling || level === 1 || level % 2 !== 0
-                                }
-                                disabled={
-                                    !levelling || level === 1 || level % 2 !== 0
-                                }
-                            ></LevelUpButton>
-                        </Score>
-                    </Ability>
-                );
-            });
-        }
-    };
-
+const Abilities = () => {
     return (
         <AbilitiesDiv>
             <SectionName>Abilities</SectionName>
-            <ScoresDiv>{getAbilityScores()}</ScoresDiv>
+            <ScoresDiv>
+                <Ability>
+                    <ItemName>Strength</ItemName>
+                    <ScoreDiv ability="strength"></ScoreDiv>
+                </Ability>
+                <Ability>
+                    <ItemName>Will</ItemName>
+                    <ScoreDiv ability="will"></ScoreDiv>
+                </Ability>
+                <Ability>
+                    <ItemName>Dexterity</ItemName>
+                    <ScoreDiv ability="dexterity"></ScoreDiv>
+                </Ability>
+            </ScoresDiv>
         </AbilitiesDiv>
     );
 };
