@@ -67,7 +67,7 @@ export interface CharacterContext {
     setName: Dispatch<SetStateAction<string>>;
     levelHistory: LevelHistory;
     updateLevelHistory: (level: number, stats: Stats) => void;
-    replaceLevelHistory: (LevelHistory) => void;
+    replaceLevelHistory: (levelHistory: LevelHistory) => void;
     level: number;
     setLevel: Dispatch<SetStateAction<number>>;
     levelling: boolean;
