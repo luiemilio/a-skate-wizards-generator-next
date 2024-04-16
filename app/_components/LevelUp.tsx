@@ -7,13 +7,19 @@ const LevelUpDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 120px;
+    width: 130px;
     gap: 5px;
 `;
 
 const LevelUp = () => {
-    const { level, levelling, setLevel, setLevelling, levelHistory, updateLevelHistory } =
-        useContext(CharacterContext);
+    const {
+        level,
+        levelling,
+        setLevel,
+        setLevelling,
+        levelHistory,
+        updateLevelHistory
+    } = useContext(CharacterContext);
 
     const levelDown = () => {
         if (level > 1) {
@@ -31,7 +37,7 @@ const LevelUp = () => {
             const currentStats = levelHistory.get(level);
 
             if (currentStats) {
-               const newStats = { ...currentStats, hp: currentStats.hp + 2 };
+                const newStats = { ...currentStats, hp: currentStats.hp + 2 };
                 updateLevelHistory(newLevel, newStats);
             }
 

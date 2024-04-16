@@ -1,16 +1,20 @@
 'use client';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     CharacterContext,
+    LevelHistory,
     Stats,
     getRandomStats,
     textFont,
     titleFont
 } from '../app/_lib/utils';
-import StatusBar from '../app/_components/StatusBar';
-import Character from '../app/_components/Character';
+import StatusBar from '@/app/_components/StatusBar';
+import Character from '@/app/_components/Character';
 import styled from 'styled-components';
-import BailOut from '../app/_components/BailOutButton';
+import BailOut from '@/app/_components/BailOutButton';
+import CharSaver from '@/app/_components/CharSaver';
+import CharPicker from '@/app/_components/CharPicker';
+import CharController from '@/app/_components/CharHandler';
 
 const Main = styled.div`
     display: flex;
@@ -31,9 +35,14 @@ const Generator = () => {
     const [levelHistory, setLevelHistory] = useState(new Map());
     const [level, setLevel] = useState(1);
     const [levelling, setLevelling] = useState(false);
+    const [name, setName] = useState('');
 
     const updateLevelHistory = (level: number, stats: Stats) => {
         setLevelHistory(new Map(levelHistory.set(level, stats)));
+    };
+
+    const replaceLevelHistory = (levelHistory: LevelHistory) => {
+        setLevelHistory(new Map(levelHistory));
     };
 
     useEffect(() => {
@@ -45,8 +54,11 @@ const Generator = () => {
     return (
         <CharacterContext.Provider
             value={{
+                name,
+                setName,
                 levelHistory,
                 updateLevelHistory,
+                replaceLevelHistory,
                 level,
                 setLevel,
                 levelling,
@@ -58,6 +70,7 @@ const Generator = () => {
                     A Skate Wizards Generator
                 </Title>
                 <BailOut></BailOut>
+                <CharController></CharController>
                 <StatusBar></StatusBar>
                 <Character></Character>
             </Main>

@@ -19,11 +19,13 @@ const BailOut = () => {
         setLevel(1);
         const initialStats = getRandomStats();
         updateLevelHistory(1, initialStats);
-    }
+    };
 
     return (
         <>
-            <BailOutButton className={textFont.className} onClick={bailOut}>Bail Out!</BailOutButton>
+            <BailOutButton className={textFont.className} onClick={bailOut}>
+                Bail Out!
+            </BailOutButton>
         </>
     );
 };

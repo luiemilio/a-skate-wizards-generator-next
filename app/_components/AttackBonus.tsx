@@ -21,7 +21,10 @@ const AttackBonus = () => {
         const stats = levelHistory.get(level);
 
         if (stats) {
-            updateLevelHistory(level, { ...stats, attackBonus: attackBonus + 1 })
+            updateLevelHistory(level, {
+                ...stats,
+                attackBonus: attackBonus + 1
+            });
         }
 
         setLevelling(false);

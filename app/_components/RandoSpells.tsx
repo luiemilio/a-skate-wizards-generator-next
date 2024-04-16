@@ -36,14 +36,17 @@ const RandoSpellsList = styled(Items)`
 const RandoSpells = () => {
     const { level, levelling, setLevelling, levelHistory, updateLevelHistory } =
         useContext(CharacterContext);
-    
+
     const [randoSpells, setRandoSpells] = useState<Item[]>([]);
 
     const addRandoSpell = () => {
         const stats = levelHistory.get(level);
 
         if (stats) {
-            updateLevelHistory(level, { ...stats, randoSpells: [...randoSpells, getRandoSpell()] })
+            updateLevelHistory(level, {
+                ...stats,
+                randoSpells: [...randoSpells, getRandoSpell()]
+            });
         }
 
         setLevelling(false);

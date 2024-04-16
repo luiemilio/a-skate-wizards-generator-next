@@ -64,7 +64,10 @@ const ScoreDiv = ({ ability }: { ability: Ability }) => {
         if (stats) {
             const { abilityScores } = stats;
             const newAbilityScores = { ...abilityScores, [ability]: newScore };
-            const newStats = { ...stats, abilityScores: { ...newAbilityScores } };
+            const newStats = {
+                ...stats,
+                abilityScores: { ...newAbilityScores }
+            };
             updateLevelHistory(level, newStats);
         }
 

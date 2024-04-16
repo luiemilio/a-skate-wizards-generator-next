@@ -16,19 +16,20 @@ const StatusDiv = styled.div`
     min-width: 450px;
     align-items: center;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 `;
 
 const HpDiv = styled.div`
     display: flex;
     justify-content: center;
-    width: 52px;
+    width: 55px;
 `;
 
 const DefenseDiv = styled.div`
     display: flex;
     justify-content: center;
-    width: 90px;
-`
+    width: 100px;
+`;
 
 const StatusBar = () => {
     const { levelHistory, level, levelling } = useContext(CharacterContext);
@@ -40,7 +41,7 @@ const StatusBar = () => {
 
         if (stats) {
             const { hp, defense } = stats;
-            
+
             setHp(hp);
             setDefense(defense);
         }

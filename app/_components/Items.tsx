@@ -6,7 +6,7 @@ const ItemsDiv = styled.div`
 `;
 
 export const ItemName = styled.div`
-    padding-left: 10px;    
+    padding-left: 10px;
     font-weight: 600;
 `;
 

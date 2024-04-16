@@ -1,3 +1,4 @@
+import * as crypto from 'crypto';
 import { createContext, Dispatch, SetStateAction } from 'react';
 import localFont from 'next/font/local';
 import {
@@ -59,9 +60,14 @@ export interface Stats {
     equipment: Item[];
 }
 
+export type LevelHistory = Map<number, Stats>;
+
 export interface CharacterContext {
-    levelHistory: Map<number, Stats>;
-    updateLevelHistory: (level: number, stats: Stats) => void
+    name: string;
+    setName: Dispatch<SetStateAction<string>>;
+    levelHistory: LevelHistory;
+    updateLevelHistory: (level: number, stats: Stats) => void;
+    replaceLevelHistory: (LevelHistory) => void;
     level: number;
     setLevel: Dispatch<SetStateAction<number>>;
     levelling: boolean;
@@ -71,13 +77,15 @@ export interface CharacterContext {
 export type StatusOptions = Partial<Status>;
 
 export const CharacterContext = createContext({
+    name: '',
+    setName: () => {},
     levelHistory: new Map(),
     updateLevelHistory: () => {},
+    replaceLevelHistory: () => {},
     level: 0,
     setLevel: () => {},
     levelling: false,
-    setLevelling: () => {},
-    stats: {}
+    setLevelling: () => {}
 } as CharacterContext);
 
 export const textFont = localFont({
@@ -204,4 +212,31 @@ export const getRandomStats = (): Stats => {
 export const generateRandomKey = (): string => {
     const uuid = crypto.randomUUID();
     return uuid;
+};
+
+const replacer = (_: any, value: any): any => {
+    return value instanceof Map
+        ? {
+              dataType: 'Map',
+              value: [...value]
+          }
+        : value;
+};
+
+const reviver = (_: any, value: any): any => {
+    return typeof value === 'object' &&
+        value !== null &&
+        value.dataType === 'Map'
+        ? new Map(value.value)
+        : value;
+};
+
+export const stringifyLevelHistory = (levelHistory: LevelHistory): string => {
+    return JSON.stringify(levelHistory, replacer);
+};
+
+export const parseLevelHistory = (
+    stringifiedLevelHistory: string
+): LevelHistory => {
+    return JSON.parse(stringifiedLevelHistory, reviver);
 };
