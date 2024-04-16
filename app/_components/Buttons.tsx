@@ -11,6 +11,7 @@ export const Button = styled.button<{ $hidden?: boolean; $disabled?: boolean }>`
     width: 25px;
     pointer-events: ${(props) => (props.$disabled ? 'none' : 'auto')};
     background: ${(props) => (props.$hidden ? 'none' : 'show')};
+    cursor: pointer;
 `;
 
 export const LevelUpButton = (props: any) => {

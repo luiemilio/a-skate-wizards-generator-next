@@ -27,6 +27,7 @@ const SaveButton = styled.button`
     padding: 3px;
     font-size: 0.9em;
     height: 100%;
+    cursor: pointer;
 `;
 
 const CharSaver = ({

@@ -27,6 +27,7 @@ const LoadButton = styled.button`
     padding: 3px;
     font-size: 0.9em;
     height: 100%;
+    cursor: pointer;
 `;
 
 const CharPicker = ({ savedWizards }: { savedWizards: string[] }) => {

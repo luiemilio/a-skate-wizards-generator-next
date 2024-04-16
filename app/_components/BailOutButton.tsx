@@ -10,6 +10,7 @@ const BailOutButton = styled.button`
     padding: 8px;
     border: none;
     font-size: 1.2em;
+    cursor: pointer;
 `;
 
 const BailOut = () => {
