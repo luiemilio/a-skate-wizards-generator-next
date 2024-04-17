@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { textFont } from '../_lib/utils';
 
@@ -57,25 +56,25 @@ const Credit = styled.p`
     color: white;
     bottom: 5px;
     left: 5px;
-    font-size: 1.3em;
+    font-size: 0.8em;
 `;
 
 const TrickModal = ({ onClose }: any) => {
     const handleCloseClick = (e: any) => {
-        if (e.target.parentNode.id === 'modal-root') {
+        if (e.target.id === 'modal-overlay') {
             e.preventDefault();
             onClose();
         }
     };
 
     const modalContent = (
-        <ModalOverlay onClick={handleCloseClick}>
+        <ModalOverlay onClick={handleCloseClick} id='modal-overlay'>
             <ModalWrapper>
                 <Modal>
                     <ModalBody>
                         <TrickIframe src="https://dhamberlin.github.io/skate-wizards/"></TrickIframe>
                         <Credit className={textFont.className}>
-                            Made by the gnarliest,{' '}
+                            Trick generator made by the gnarliest,{' '}
                             <a
                                 href="https://github.com/dhamberlin"
                                 target="_blank"
@@ -89,11 +88,7 @@ const TrickModal = ({ onClose }: any) => {
         </ModalOverlay>
     );
 
-    const modalRoot = document.getElementById('modal-root');
-
-    if (modalRoot) {
-        return ReactDOM.createPortal(modalContent, modalRoot);
-    }
+    return modalContent;
 };
 
 export default TrickModal;
