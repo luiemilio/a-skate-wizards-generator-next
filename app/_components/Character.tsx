@@ -9,6 +9,7 @@ import BootlegSpells from './BootlegSpells';
 const CharacterMainDiv = styled.div`
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
 `;
 
 const CharacterTopAndBottom = styled.div`
@@ -16,7 +17,6 @@ const CharacterTopAndBottom = styled.div`
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    min-width: 450px;
 `;
 
 const Character = () => {
