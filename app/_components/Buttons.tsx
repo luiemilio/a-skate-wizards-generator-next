@@ -3,6 +3,24 @@ import minus from '../_assets/minus.svg';
 import plus from '../_assets/plus.svg';
 import Image from 'next/image';
 
+export const BailOutButton = styled.button<{ $rotate?: boolean }>`
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    padding: 5px;
+    border: none;
+    font-size: 0.9em;
+    cursor: pointer;
+    animation: ${(props) => (props.$rotate ? 'rotate 0.5s' : '')};
+
+    @keyframes rotate {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+`;
+
 export const Button = styled.button<{ $hidden?: boolean; $disabled?: boolean }>`
     border-radius: 4px;
     border: none;
