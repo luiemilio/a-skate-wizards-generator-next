@@ -7,9 +7,9 @@ const BailOutButton = styled.button`
     color: white;
     border-radius: 4px;
     text-align: center;
-    padding: 8px;
+    padding: 5px;
     border: none;
-    font-size: 1.2em;
+    font-size: 0.9em;
     cursor: pointer;
 `;
 

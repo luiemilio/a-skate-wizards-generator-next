@@ -12,9 +12,8 @@ import StatusBar from '@/app/_components/StatusBar';
 import Character from '@/app/_components/Character';
 import styled from 'styled-components';
 import BailOut from '@/app/_components/BailOutButton';
-import CharSaver from '@/app/_components/CharSaver';
-import CharPicker from '@/app/_components/CharPicker';
 import CharController from '@/app/_components/CharHandler';
+import TrickModal from '@/app/_components/TrickModal';
 
 const Main = styled.div`
     display: flex;
@@ -31,11 +30,29 @@ const Title = styled.div`
     text-align: center;
 `;
 
+const TrickButton = styled.button`
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    padding: 5px;
+    border: none;
+    font-size: 0.9em;
+    cursor: pointer;
+    height: 100%;
+`;
+
+const MainButtons = styled.div`
+    display: flex;
+    gap: 50px;
+`;
+
 const Generator = () => {
     const [levelHistory, setLevelHistory] = useState(new Map());
     const [level, setLevel] = useState(1);
     const [levelling, setLevelling] = useState(false);
     const [name, setName] = useState('');
+    const [showModal, setShowModal] = useState(false);
 
     const updateLevelHistory = (level: number, stats: Stats) => {
         setLevelHistory(new Map(levelHistory.set(level, stats)));
@@ -66,10 +83,23 @@ const Generator = () => {
             }}
         >
             <Main className={textFont.className}>
+                {showModal && (
+                    <TrickModal
+                        onClose={() => setShowModal(false)}
+                    ></TrickModal>
+                )}
                 <Title className={titleFont.className}>
                     A Skate Wizards Generator
                 </Title>
-                <BailOut></BailOut>
+                <MainButtons>
+                    <TrickButton
+                        className={textFont.className}
+                        onClick={() => setShowModal(true)}
+                    >
+                        Click 4 Trick
+                    </TrickButton>
+                    <BailOut></BailOut>
+                </MainButtons>
                 <CharController></CharController>
                 <StatusBar></StatusBar>
                 <Character></Character>
