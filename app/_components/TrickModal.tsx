@@ -45,7 +45,7 @@ const TrickIframe = styled.iframe`
 `;
 
 const TrickModal = ({ onClose }: any) => {
-    const handleCloseClick = (e) => {
+    const handleCloseClick = (e: any) => {
         e.preventDefault();
         onClose();
     };
