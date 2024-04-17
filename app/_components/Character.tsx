@@ -6,7 +6,7 @@ import PermSpells from './PermSpells';
 import Equipment from './Equipment';
 import BootlegSpells from './BootlegSpells';
 
-const CharacterDiv = styled.div`
+const CharacterMainDiv = styled.div`
     display: flex;
     flex-direction: column;
 `;
@@ -19,14 +19,9 @@ const CharacterTopAndBottom = styled.div`
     min-width: 450px;
 `;
 
-export const SectionName = styled.div`
-    align-self: center;
-    font-weight: 600;
-`;
-
 const Character = () => {
     return (
-        <CharacterDiv>
+        <CharacterMainDiv>
             <CharacterTopAndBottom>
                 <Abilities></Abilities>
                 <PermSpells></PermSpells>
@@ -36,7 +31,7 @@ const Character = () => {
                 <RandoSpells></RandoSpells>
                 <BootlegSpells></BootlegSpells>
             </CharacterTopAndBottom>
-        </CharacterDiv>
+        </CharacterMainDiv>
     );
 };
 

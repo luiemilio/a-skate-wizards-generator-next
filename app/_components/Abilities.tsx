@@ -2,17 +2,12 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { LevelUpButton } from './Buttons';
 import { CharacterContext } from '../_lib/utils';
 import styled from 'styled-components';
-import { SectionName } from './Character';
 import { ItemName } from './Items';
+import { Section, SectionName } from './Section';
 
 type Ability = 'strength' | 'dexterity' | 'will';
 
-const AbilitiesDiv = styled.div`
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    height: 350px;
-    width: 450px;
+const AbilitiesDiv = styled(Section)`
     border-bottom: 1px solid black;
     border-right: 1px solid black;
 

@@ -1,15 +1,10 @@
 import Items from './Items';
 import { CharacterContext, Item } from '../_lib/utils';
 import { useContext, useEffect, useState } from 'react';
-import { SectionName } from './Character';
 import styled from 'styled-components';
+import { Section, SectionName } from './Section';
 
-const PermSpellsDiv = styled.div`
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    height: 350px;
-    width: 450px;
+const PermSpellsDiv = styled(Section)`
     border-bottom: 1px solid black;
     border-right: 1px solid black;
 
@@ -38,7 +33,7 @@ const PermSpells = () => {
     return (
         <PermSpellsDiv>
             <SectionName>Permanent Spells</SectionName>
-            <Items items={permSpells}></Items>
+            <Items items={permSpells} highlightNames></Items>
         </PermSpellsDiv>
     );
 };

@@ -1,15 +1,10 @@
 import Items from './Items';
 import { CharacterContext, Item } from '../_lib/utils';
 import { useContext, useEffect, useState } from 'react';
-import { SectionName } from './Character';
 import styled from 'styled-components';
+import { Section, SectionName } from './Section';
 
-const BootLegSpellsDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 350px;
-    width: 450px;
-`;
+const BootLegSpellsDiv = styled(Section)``;
 
 const BootlegSpells = () => {
     const { level, levelHistory } = useContext(CharacterContext);
@@ -28,7 +23,7 @@ const BootlegSpells = () => {
     return (
         <BootLegSpellsDiv>
             <SectionName>Bootleg Spells</SectionName>
-            <Items items={bootlegSpells}></Items>
+            <Items items={bootlegSpells} highlightNames></Items>
         </BootLegSpellsDiv>
     );
 };

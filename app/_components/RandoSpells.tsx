@@ -3,14 +3,10 @@ import { LevelUpButton } from './Buttons';
 import { CharacterContext } from '../_lib/utils';
 import { Item, getRandoSpell } from '../_lib/utils';
 import styled from 'styled-components';
-import { SectionName } from './Character';
 import Items from './Items';
+import { Section, SectionName } from './Section';
 
-const RandoSpellsDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 350px;
-    width: 450px;
+const RandoSpellsDiv = styled(Section)`
     border-right: 1px solid black;
 
     @media all and (max-width: 1049px) {

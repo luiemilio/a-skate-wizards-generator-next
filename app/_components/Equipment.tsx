@@ -2,13 +2,9 @@ import Items from './Items';
 import { CharacterContext, Item } from '../_lib/utils';
 import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { SectionName } from './Character';
+import { Section, SectionName } from './Section';
 
-const EquipmentDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 350px;
-    width: 450px;
+const EquipmentDiv = styled(Section)`
     border-bottom: 1px solid black;
 `;
 
@@ -29,7 +25,7 @@ export const Equipment = () => {
     return (
         <EquipmentDiv>
             <SectionName>Equipment</SectionName>
-            <Items items={equipment}></Items>
+            <Items items={equipment} highlightNames></Items>
         </EquipmentDiv>
     );
 };
