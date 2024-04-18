@@ -14,6 +14,7 @@ import styled from 'styled-components';
 import BailOut from '@/app/_components/BailOutButton';
 import CharController from '@/app/_components/CharHandler';
 import TrickModal from '@/app/_components/TrickModal';
+import ClickTrick from '@/app/_components/TrickClick';
 
 const Main = styled.div`
     display: flex;
@@ -28,18 +29,6 @@ const Main = styled.div`
 const Title = styled.div`
     font-size: 4.2em;
     text-align: center;
-`;
-
-const TrickButton = styled.button`
-    background-color: black;
-    color: white;
-    border-radius: 4px;
-    text-align: center;
-    padding: 5px;
-    border: none;
-    font-size: 0.9em;
-    cursor: pointer;
-    height: 100%;
 `;
 
 const MainButtons = styled.div`
@@ -92,12 +81,7 @@ const Generator = () => {
                     A Skate Wizards Generator
                 </Title>
                 <MainButtons>
-                    <TrickButton
-                        className={textFont.className}
-                        onClick={() => setShowModal(true)}
-                    >
-                        Click 4 Trick
-                    </TrickButton>
+                    <ClickTrick setShowModal={setShowModal}></ClickTrick>
                     <BailOut></BailOut>
                 </MainButtons>
                 <CharController></CharController>

@@ -7,7 +7,6 @@ export const Section = styled.div`
     height: 380px;
 
     @media all and (max-width: 1349px) {
-        
     }
 
     @media all and (max-width: 899px) {

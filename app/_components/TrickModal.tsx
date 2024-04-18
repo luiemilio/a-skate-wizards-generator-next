@@ -68,7 +68,7 @@ const TrickModal = ({ onClose }: any) => {
     };
 
     const modalContent = (
-        <ModalOverlay onClick={handleCloseClick} id='modal-overlay'>
+        <ModalOverlay onClick={handleCloseClick} id="modal-overlay">
             <ModalWrapper>
                 <Modal>
                     <ModalBody>
