@@ -10,6 +10,11 @@ const ClickTrick = ({
     const [rotate, setRotate] = useState(false);
 
     const trickClick = () => {
+        setRotate(true);
+    };
+    
+    const onAnimationEnd = () => {
+        setRotate(false)
         setShowModal(true);
     };
 
@@ -18,7 +23,7 @@ const ClickTrick = ({
             className={textFont.className}
             onClick={trickClick}
             $rotate={rotate}
-            onAnimationEnd={() => setRotate(false)}
+            onAnimationEnd={onAnimationEnd}
         >
             Click 4 Trick
         </TrickButton>

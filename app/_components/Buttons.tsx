@@ -4,7 +4,7 @@ import minus from '../_assets/minus.svg';
 import plus from '../_assets/plus.svg';
 import Image from 'next/image';
 
-export const NewButton = styled.button.attrs({ className: textFont.className })`
+export const Button = styled.button.attrs({ className: textFont.className })`
     border-radius: 4px;
     border: none;
     background-color: black;
@@ -12,7 +12,7 @@ export const NewButton = styled.button.attrs({ className: textFont.className })`
     color: white;
 `;
 
-export const LevelButton = styled(NewButton)<{
+export const LevelButton = styled(Button)<{
     $hidden?: boolean;
     $disabled?: boolean;
 }>`
@@ -22,43 +22,34 @@ export const LevelButton = styled(NewButton)<{
     width: 25px;
 `;
 
-export const BailOutButton = styled(NewButton)<{ $rotate?: boolean }>`
-    background-color: black;
-    color: white;
-    border-radius: 4px;
+export const GnarlyButton = styled(Button)<{ $rotate?: boolean }>`
     text-align: center;
     padding: 5px;
-    border: none;
     font-size: 0.9em;
-    cursor: pointer;
-    animation: ${(props) => (props.$rotate ? 'rotate 0.5s' : '')};
-
-    @keyframes rotate {
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-`;
-
-export const TrickButton = styled(NewButton)<{ $rotate?: boolean }>`
-    background-color: black;
-    color: white;
-    border-radius: 4px;
-    text-align: center;
-    padding: 5px;
-    border: none;
-    font-size: 0.9em;
-    cursor: pointer;
     height: 100%;
+`;
 
-    animation: ${(props) => (props.$rotate ? 'rotate 0.5s' : '')};
+export const BailOutButton = styled(GnarlyButton)<{ $rotate?: boolean }>`
+    animation: ${(props) => (props.$rotate ? 'rotateBailOut 0.5s' : '')};
 
-    @keyframes rotate {
+    @keyframes rotateBailOut {
         100% {
             transform: rotate(360deg);
         }
     }
 `;
+
+export const TrickButton = styled(GnarlyButton)<{ $rotate?: boolean }>`
+    animation: ${(props) => (props.$rotate ? 'rotateTrick 0.5s' : '')};
+
+    @keyframes rotateTrick {
+        100% {
+            transform: rotate(-360deg);
+        }
+    }
+`;
+
+
 
 export const LevelUpButton = (props: any) => {
     return (
