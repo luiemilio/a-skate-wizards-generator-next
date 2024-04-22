@@ -15,7 +15,6 @@ const SectionTitleDiv = styled.div`
     gap: 5px;
     justify-content: center;
     align-items: center;
-    padding-bottom: 10px;
 
     * {
         padding: 0px;

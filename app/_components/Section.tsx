@@ -7,6 +7,7 @@ export const Section = styled.div`
     height: 380px;
     overflow-x: hidden;
     overflow-y: hidden;
+    gap: 5px;
 
     @media all and (max-width: 899px) {
         height: 100%;
@@ -19,5 +20,4 @@ export const SectionName = styled.div`
     align-self: center;
     font-weight: 600;
     font-size: 1.2em;
-    padding-bottom: 10px;
 `;
