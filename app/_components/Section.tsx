@@ -5,6 +5,8 @@ export const Section = styled.div`
     flex-direction: column;
     width: 450px;
     height: 380px;
+    overflow: scroll;
+    overflow-x: hidden;
 
     @media all and (max-width: 1349px) {
     }

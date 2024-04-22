@@ -92,15 +92,15 @@ const Abilities = () => {
             <ScoresDiv>
                 <Ability>
                     <ItemName>Strength</ItemName>
-                    <ScoreDiv ability="strength"></ScoreDiv>
+                    <ScoreDiv ability='strength'></ScoreDiv>
                 </Ability>
                 <Ability>
                     <ItemName>Will</ItemName>
-                    <ScoreDiv ability="will"></ScoreDiv>
+                    <ScoreDiv ability='will'></ScoreDiv>
                 </Ability>
                 <Ability>
                     <ItemName>Dexterity</ItemName>
-                    <ScoreDiv ability="dexterity"></ScoreDiv>
+                    <ScoreDiv ability='dexterity'></ScoreDiv>
                 </Ability>
             </ScoresDiv>
         </AbilitiesDiv>

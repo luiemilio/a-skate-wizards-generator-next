@@ -12,9 +12,9 @@ const ClickTrick = ({
     const trickClick = () => {
         setRotate(true);
     };
-    
+
     const onAnimationEnd = () => {
-        setRotate(false)
+        setRotate(false);
         setShowModal(true);
     };
 
