@@ -22,12 +22,12 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-    min-width: 450px;
-    width: 500px;
+    width: 450px;
     max-height: 700px;
-    padding-top: 50px;
-    padding-right: 10px;
-    padding-left: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 `;
 
 const ModalDiv = styled.div`

@@ -3,9 +3,9 @@ import { textFont } from '../_lib/utils';
 import { useState } from 'react';
 
 const ClickTrick = ({
-    setShowModal
+    setShowTrickModal
 }: {
-    setShowModal: (boolean: boolean) => void;
+    setShowTrickModal: (boolean: boolean) => void;
 }) => {
     const [rotate, setRotate] = useState(false);
 
@@ -15,7 +15,7 @@ const ClickTrick = ({
 
     const onAnimationEnd = () => {
         setRotate(false);
-        setShowModal(true);
+        setShowTrickModal(true);
     };
 
     return (

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const ItemsDiv = styled.div`
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 `;
 
 export const ItemName = styled.div<{ $highlight?: boolean }>`
@@ -20,7 +21,7 @@ const Items = ({ items, highlightNames }: any) => {
         <ItemsDiv>
             {items?.map((item: any) => {
                 return (
-                    <div key={item.name}>
+                    <div key={`${item.name + Math.random() * 10000}`}>
                         <ItemName $highlight={highlightNames}>
                             {item.name}
                         </ItemName>

@@ -41,7 +41,7 @@ const Generator = () => {
     const [level, setLevel] = useState(1);
     const [levelling, setLevelling] = useState(false);
     const [name, setName] = useState('');
-    const [showModal, setShowModal] = useState(false);
+    const [showTrickModal, setShowTrickModal] = useState(false);
 
     const updateLevelHistory = (level: number, stats: Stats) => {
         setLevelHistory(new Map(levelHistory.set(level, stats)));
@@ -72,16 +72,16 @@ const Generator = () => {
             }}
         >
             <Main className={textFont.className}>
-                {showModal && (
+                {showTrickModal && (
                     <TrickModal
-                        onClose={() => setShowModal(false)}
+                        onClose={() => setShowTrickModal(false)}
                     ></TrickModal>
                 )}
                 <Title className={titleFont.className}>
                     A Skate Wizards Generator
                 </Title>
                 <MainButtons>
-                    <ClickTrick setShowModal={setShowModal}></ClickTrick>
+                    <ClickTrick setShowTrickModal={setShowTrickModal}></ClickTrick>
                     <BailOut></BailOut>
                 </MainButtons>
                 <CharController></CharController>
