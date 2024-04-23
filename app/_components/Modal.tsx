@@ -39,7 +39,7 @@ const ModalDiv = styled.div`
 `;
 
 const Modal = ({ children, onClose }: ModalProps) => {
-    const handleClick = (e: MouseEvent) => {
+    const handleClick = (e: any) => {
         if ((e.target as HTMLDivElement)?.id === 'modal-overlay') {
             e.preventDefault();
             onClose();
