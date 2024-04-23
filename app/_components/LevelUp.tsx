@@ -24,7 +24,6 @@ const LevelUp = () => {
     const levelDown = () => {
         if (level > 1) {
             const newLevel = level - 1;
-            console.log('setting level: ', newLevel);
             levelHistory.delete(level);
             setLevel(newLevel);
         }
@@ -33,7 +32,6 @@ const LevelUp = () => {
     const levelUp = () => {
         if (level < 7) {
             const newLevel = level + 1;
-            console.log('setting level: ', newLevel);
             const currentStats = levelHistory.get(level);
 
             if (currentStats) {

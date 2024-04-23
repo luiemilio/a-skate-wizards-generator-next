@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { CharacterContext, textFont } from '../_lib/utils';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getAllSavedWizardNames, getLevelHistory } from '../_lib/db';
 
 const CharPickerDiv = styled.div`
@@ -50,6 +50,10 @@ const CharPicker = ({ savedWizards }: { savedWizards: string[] }) => {
             setName(selectedName);
         }
     };
+
+    useEffect(() => {
+        setSelectedName(savedWizards[0]);
+    }, [savedWizards]);
 
     const populateWizards = () => {
         return savedWizards.map((wizard) => {

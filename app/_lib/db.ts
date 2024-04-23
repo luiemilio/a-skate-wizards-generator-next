@@ -4,12 +4,16 @@ import {
     stringifyLevelHistory
 } from './utils';
 
+const NAME_PREFIX = 'wizard-';
+
 const hasLocalStorage = typeof window !== 'undefined' && window?.localStorage;
 
 export const save = (name: string, levelHistory: LevelHistory): void => {
     if (hasLocalStorage) {
+        const storedName = `${NAME_PREFIX}${name}`;
+        
         localStorage.setItem(
-            `wizard-${name}`,
+            storedName,
             stringifyLevelHistory(levelHistory)
         );
     }
@@ -17,7 +21,8 @@ export const save = (name: string, levelHistory: LevelHistory): void => {
 
 export const getLevelHistory = (name: string): LevelHistory | undefined => {
     if (hasLocalStorage) {
-        const stringifiedLevelHistory = localStorage.getItem(`wizard-${name}`);
+        const storedName = `${NAME_PREFIX}${name}`;
+        const stringifiedLevelHistory = localStorage.getItem(storedName);
 
         if (!stringifiedLevelHistory) {
             return undefined;
@@ -36,7 +41,7 @@ export const getAllSavedWizardNames = (): string[] => {
         for (let i = 0; i < localStorage.length; i++) {
             const name = localStorage.key(i);
 
-            if (typeof name === 'string' && name.startsWith('wizard-')) {
+            if (typeof name === 'string' && name.startsWith(NAME_PREFIX)) {
                 savedWizards.push(name.slice(7));
             }
         }

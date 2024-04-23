@@ -68,7 +68,6 @@ const AddBootlegSpellModal = ({ onClose }: { onClose: () => void }) => {
 
     const addBootlegSpell = () => {
         const currentStats = levelHistory.get(level);
-        console.log(selectedSpell);
 
         if (currentStats && selectedSpell) {
             const { bootlegSpells } = currentStats;
