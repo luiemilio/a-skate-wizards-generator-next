@@ -39,7 +39,8 @@ const DescriptionInput = styled.textarea`
 `;
 
 const AddEquipmentModal = ({ onClose }: { onClose: () => void }) => {
-    const { level, levelHistory, updateLevelHistory } = useContext(CharacterContext);
+    const { level, levelHistory, updateLevelHistory } =
+        useContext(CharacterContext);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 
@@ -61,9 +62,17 @@ const AddEquipmentModal = ({ onClose }: { onClose: () => void }) => {
             <AddEquipmentDiv>
                 <Header>Add Equipment</Header>
                 <label>Name</label>
-                <NameInput className={textFont.className} type='text' name='item' onChange={(e) => setName(e.currentTarget.value)}/>
+                <NameInput
+                    className={textFont.className}
+                    type='text'
+                    name='item'
+                    onChange={(e) => setName(e.currentTarget.value)}
+                />
                 <label>Description</label>
-                <DescriptionInput className={textFont.className} onChange={(e) => setDescription(e.currentTarget.value)}/>
+                <DescriptionInput
+                    className={textFont.className}
+                    onChange={(e) => setDescription(e.currentTarget.value)}
+                />
                 <AddButton onClick={addEquipment}>Add</AddButton>
             </AddEquipmentDiv>
         </Modal>

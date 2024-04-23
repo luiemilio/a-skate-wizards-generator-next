@@ -15,10 +15,6 @@ const SectionTitleDiv = styled.div`
     gap: 5px;
     justify-content: center;
     align-items: center;
-
-    * {
-        padding: 0px;
-    }
 `;
 
 export const Equipment = () => {

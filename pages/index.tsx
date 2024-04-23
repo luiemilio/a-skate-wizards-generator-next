@@ -81,7 +81,9 @@ const Generator = () => {
                     A Skate Wizards Generator
                 </Title>
                 <MainButtons>
-                    <ClickTrick setShowTrickModal={setShowTrickModal}></ClickTrick>
+                    <ClickTrick
+                        setShowTrickModal={setShowTrickModal}
+                    ></ClickTrick>
                     <BailOut></BailOut>
                 </MainButtons>
                 <CharController></CharController>
