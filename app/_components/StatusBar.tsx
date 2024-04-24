@@ -4,6 +4,9 @@ import LevelUp from './LevelUp';
 import AttackBonus from './AttackBonus';
 import { CharacterContext } from '../_lib/utils';
 import styled from 'styled-components';
+import Image from 'next/image';
+import chillWizardOnSkateBoard from '../_assets/images/wizardchillonskateboard.png';
+import wizardOnMushroom from '../_assets/images/wizardonmushroom.png';
 
 const StatusDiv = styled.div`
     display: flex;
@@ -49,10 +52,22 @@ const StatusBar = () => {
 
     return (
         <StatusDiv>
+            <Image
+                src={chillWizardOnSkateBoard}
+                alt='chill wizard'
+                width={100}
+                height={60}
+            />
             <LevelUp></LevelUp>
             <HpDiv>{`HP: ${hp}`}</HpDiv>
             <DefenseDiv>{`Defense: ${defense}`}</DefenseDiv>
             <AttackBonus></AttackBonus>
+            <Image
+                src={wizardOnMushroom}
+                alt='wizard on mushroom'
+                width={50}
+                height={50}
+            />
         </StatusDiv>
     );
 };

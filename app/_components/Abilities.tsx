@@ -4,6 +4,8 @@ import { CharacterContext } from '../_lib/utils';
 import styled from 'styled-components';
 import { ItemName } from './Items';
 import { Section, SectionName } from './Section';
+import Image from 'next/image';
+import fieldWizard from '../_assets/images/fieldwizard.png';
 
 type Ability = 'strength' | 'dexterity' | 'will';
 
@@ -33,6 +35,10 @@ const Score = styled.div`
     display: flex;
     justify-content: space-between;
     width: 70px;
+`;
+
+const BottomDiv = styled.div`
+    display: flex;
 `;
 
 const ScoreDiv = ({ ability }: { ability: Ability }) => {
@@ -89,20 +95,28 @@ const Abilities = () => {
     return (
         <AbilitiesDiv>
             <SectionName>Abilities</SectionName>
-            <ScoresDiv>
-                <Ability>
-                    <ItemName>Strength</ItemName>
-                    <ScoreDiv ability='strength'></ScoreDiv>
-                </Ability>
-                <Ability>
-                    <ItemName>Will</ItemName>
-                    <ScoreDiv ability='will'></ScoreDiv>
-                </Ability>
-                <Ability>
-                    <ItemName>Dexterity</ItemName>
-                    <ScoreDiv ability='dexterity'></ScoreDiv>
-                </Ability>
-            </ScoresDiv>
+            <BottomDiv>
+                <Image
+                    src={fieldWizard}
+                    alt='field wizard'
+                    width={200}
+                    height={300}
+                />
+                <ScoresDiv>
+                    <Ability>
+                        <ItemName>Strength</ItemName>
+                        <ScoreDiv ability='strength'></ScoreDiv>
+                    </Ability>
+                    <Ability>
+                        <ItemName>Will</ItemName>
+                        <ScoreDiv ability='will'></ScoreDiv>
+                    </Ability>
+                    <Ability>
+                        <ItemName>Dexterity</ItemName>
+                        <ScoreDiv ability='dexterity'></ScoreDiv>
+                    </Ability>
+                </ScoresDiv>
+            </BottomDiv>
         </AbilitiesDiv>
     );
 };

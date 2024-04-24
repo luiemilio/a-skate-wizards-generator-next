@@ -36,6 +36,30 @@ const MainButtons = styled.div`
     gap: 50px;
 `;
 
+const SkateWizardCreditDiv = styled.div`
+    align-self: flex-start;
+`;
+
+const Credit = styled.p`
+    font-size: 0.7em;
+`;
+
+const SkateWizardsCredit = () => {
+    return (
+        <SkateWizardCreditDiv>
+            <Credit>
+                <a href='https://skatewizards.bigcartel.com/' target='_blank'>
+                    Skate Wizards
+                </a>{' '}
+                and all images on this website are owned by{' '}
+                <a href='https://michaelchsiung.com/en-us' target='_blank'>
+                    Michael C. Hsiung (熊家麟).
+                </a>
+            </Credit>
+        </SkateWizardCreditDiv>
+    );
+};
+
 const Generator = () => {
     const [levelHistory, setLevelHistory] = useState(new Map());
     const [level, setLevel] = useState(1);
@@ -89,6 +113,7 @@ const Generator = () => {
                 <CharController></CharController>
                 <StatusBar></StatusBar>
                 <Character></Character>
+                <SkateWizardsCredit></SkateWizardsCredit>
             </Main>
         </CharacterContext.Provider>
     );

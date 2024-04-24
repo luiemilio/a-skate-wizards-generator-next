@@ -11,11 +11,8 @@ const hasLocalStorage = typeof window !== 'undefined' && window?.localStorage;
 export const save = (name: string, levelHistory: LevelHistory): void => {
     if (hasLocalStorage) {
         const storedName = `${NAME_PREFIX}${name}`;
-        
-        localStorage.setItem(
-            storedName,
-            stringifyLevelHistory(levelHistory)
-        );
+
+        localStorage.setItem(storedName, stringifyLevelHistory(levelHistory));
     }
 };
 

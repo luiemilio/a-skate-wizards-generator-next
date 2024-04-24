@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import { Section, SectionName } from './Section';
 import { LevelUpButton } from './Buttons';
 import AddEquipmentModal from './AddEquipmentModal';
+import Image from 'next/image';
+import skateKey from '../_assets/images/skatekey.png';
+import tape from '../_assets/images/tape.png';
 
 const EquipmentDiv = styled(Section)`
     border-bottom: 1px solid black;
@@ -40,10 +43,12 @@ export const Equipment = () => {
                 ></AddEquipmentModal>
             )}
             <SectionTitleDiv>
+                <Image src={skateKey} alt='skate key' width={50} height={50} />
                 <SectionName>Equipment</SectionName>
                 <LevelUpButton
                     onClick={() => setShowAddEquipmentModal(true)}
                 ></LevelUpButton>
+                <Image src={tape} alt='tape' width={50} height={50} />
             </SectionTitleDiv>
             <Items items={equipment} highlightNames></Items>
         </EquipmentDiv>
