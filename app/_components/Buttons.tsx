@@ -49,18 +49,28 @@ export const TrickButton = styled(GnarlyButton)<{ $rotate?: boolean }>`
     }
 `;
 
-export const LevelUpButton = (props: any) => {
+export const LevelUpButton = ({ imageWidth, imageHeight, ...props }: any) => {
     return (
         <LevelButton {...props}>
-            <Image width={25} height={25} src={plus.src} alt=''></Image>
+            <Image
+                width={imageWidth || 25}
+                height={imageHeight || 25}
+                src={plus.src}
+                alt=''
+            ></Image>
         </LevelButton>
     );
 };
 
-export const LevelDownButton = (props: any) => {
+export const LevelDownButton = ({ imageWidth, imageHeight, ...props }: any) => {
     return (
         <LevelButton {...props}>
-            <Image width={25} height={25} src={minus.src} alt=''></Image>
+            <Image
+                width={imageWidth || 25}
+                height={imageHeight || 25}
+                src={minus.src}
+                alt=''
+            ></Image>
         </LevelButton>
     );
 };

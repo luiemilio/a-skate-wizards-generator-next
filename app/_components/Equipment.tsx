@@ -21,7 +21,8 @@ const SectionTitleDiv = styled.div`
 `;
 
 export const Equipment = () => {
-    const { level, levelHistory } = useContext(CharacterContext);
+    const { level, levelHistory, updateLevelHistory } =
+        useContext(CharacterContext);
     const [equipment, setEquipment] = useState<Item[]>([]);
     const [showAddEquipmentModal, setShowAddEquipmentModal] = useState(false);
 
@@ -34,6 +35,21 @@ export const Equipment = () => {
             setEquipment(equipment);
         }
     }, [level, levelHistory]);
+
+    const onItemDeletion = (item: any) => {
+        console.log(item);
+
+        const currentStats = levelHistory.get(level);
+
+        if (currentStats) {
+            const { equipment } = currentStats;
+            const newEquipment = equipment.filter(
+                (equipment) => equipment.name !== item.name
+            );
+            const newStats = { ...currentStats, equipment: newEquipment };
+            updateLevelHistory(level, newStats);
+        }
+    };
 
     return (
         <EquipmentDiv>
@@ -50,7 +66,12 @@ export const Equipment = () => {
                 ></LevelUpButton>
                 <Image src={tape} alt='tape' width={50} height={50} />
             </SectionTitleDiv>
-            <Items items={equipment} highlightNames></Items>
+            <Items
+                items={equipment}
+                highlightNames
+                $removableItems
+                onItemDeletion={onItemDeletion}
+            ></Items>
         </EquipmentDiv>
     );
 };

@@ -45,7 +45,7 @@ const BootlegSpells = () => {
                     onClick={() => setShowAddBootlegSpellModal(true)}
                 ></LevelUpButton>
             </SectionTitleDiv>
-            <Items items={bootlegSpells} highlightNames></Items>
+            <Items items={bootlegSpells} highlightNames $removableItems></Items>
         </BootLegSpellsDiv>
     );
 };

@@ -19,5 +19,5 @@ export const Section = styled.div`
 export const SectionName = styled.div`
     align-self: center;
     font-weight: 600;
-    font-size: 1.2em;
+    font-size: 1.3em;
 `;
