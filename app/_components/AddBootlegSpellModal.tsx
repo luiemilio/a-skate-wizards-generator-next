@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CharacterContext, Item, textFont } from '../_lib/utils';
+import { CharacterContext, Item, getNextId, textFont } from '../_lib/utils';
 import Modal from './Modal';
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Button } from './Buttons';
@@ -71,7 +71,11 @@ const AddBootlegSpellModal = ({ onClose }: { onClose: () => void }) => {
 
         if (currentStats && selectedSpell) {
             const { bootlegSpells } = currentStats;
-            const newBootlegSpells = [...bootlegSpells, selectedSpell];
+            const newBootlegSpell = {
+                ...selectedSpell,
+                id: getNextId(bootlegSpells)
+            };
+            const newBootlegSpells = [...bootlegSpells, newBootlegSpell];
             const newStats = {
                 ...currentStats,
                 bootlegSpells: newBootlegSpells

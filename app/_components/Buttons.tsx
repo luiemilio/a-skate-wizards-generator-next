@@ -74,3 +74,18 @@ export const LevelDownButton = ({ imageWidth, imageHeight, ...props }: any) => {
         </LevelButton>
     );
 };
+
+export const StyledLevelDownButton = styled(LevelDownButton)`
+    width: 20px;
+    height: 20px;
+`;
+
+export const RemoveItemButton = (props: any) => {
+    return (
+        <StyledLevelDownButton
+            {...props}
+            imageHeight={20}
+            imageWidth={20}
+        ></StyledLevelDownButton>
+    );
+};

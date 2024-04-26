@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 import { Item } from '../_lib/utils';
-import { LevelDownButton } from './Buttons';
+import { RemoveItemButton } from './Buttons';
+
+export interface ItemsProps {
+    items: Item[];
+    highlightNames?: boolean;
+    onItemDeletion?: (item: Item) => void;
+    $removableItems?: boolean;
+}
 
 const ItemsDiv = styled.div`
     display: flex;
@@ -16,21 +23,6 @@ const ItemNameDiv = styled.div<{ $highlight?: boolean }>`
     font-weight: 600;
     text-decoration: ${(props) => (props.$highlight ? 'underline' : 'auto')};
 `;
-
-const StyledLevelDownButton = styled(LevelDownButton)`
-    width: 20px;
-    height: 20px;
-`;
-
-const RemoveItemButton = (props: any) => {
-    return (
-        <StyledLevelDownButton
-            {...props}
-            imageHeight={20}
-            imageWidth={20}
-        ></StyledLevelDownButton>
-    );
-};
 
 export const ItemName = ({
     $highlight,
@@ -59,12 +51,12 @@ export const ItemDescription = styled.div`
     padding-left: 10px;
 `;
 
-const Items = ({
+export const Items = ({
     items,
     highlightNames,
     onItemDeletion,
     $removableItems
-}: any) => {
+}: ItemsProps) => {
     return (
         <ItemsDiv>
             {items?.map((item: Item) => {

@@ -37,14 +37,12 @@ export const Equipment = () => {
     }, [level, levelHistory]);
 
     const onItemDeletion = (item: any) => {
-        console.log(item);
-
         const currentStats = levelHistory.get(level);
 
         if (currentStats) {
             const { equipment } = currentStats;
             const newEquipment = equipment.filter(
-                (equipment) => equipment.name !== item.name
+                (equipment) => equipment.id !== item.id
             );
             const newStats = { ...currentStats, equipment: newEquipment };
             updateLevelHistory(level, newStats);

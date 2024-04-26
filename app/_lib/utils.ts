@@ -13,6 +13,7 @@ export type Item = {
     uuid?: string;
     name: string;
     description?: string;
+    id: number;
 };
 
 export type AbilityScores = {
@@ -202,10 +203,12 @@ export const getRandomStats = (): Stats => {
         defense,
         attackBonus,
         abilityScores,
-        randoSpells: [randoSpell],
-        bootlegSpells: [bootlegSpell],
+        randoSpells: [{ ...randoSpell, id: 0 }],
+        bootlegSpells: [{ ...bootlegSpell, id: 0 }],
         permSpells: PERMANENT_SPELLS,
-        equipment
+        equipment: equipment.map((item, idx) => {
+            return { ...item, id: idx };
+        })
     };
 };
 
@@ -239,4 +242,8 @@ export const parseLevelHistory = (
     stringifiedLevelHistory: string
 ): LevelHistory => {
     return JSON.parse(stringifiedLevelHistory, reviver);
+};
+
+export const getNextId = (items: Item[]): number => {
+    return items.length > 0 ? items[items.length - 1].id + 1 : 0;
 };

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { LevelUpButton } from './Buttons';
-import { CharacterContext } from '../_lib/utils';
+import { CharacterContext, getNextId } from '../_lib/utils';
 import { Item, getRandoSpell } from '../_lib/utils';
 import styled from 'styled-components';
 import Items from './Items';
@@ -21,11 +21,29 @@ const RandoSpellsDiv = styled(Section)`
 const Header = styled.div`
     display: flex;
     justify-content: center;
+    align-items: center;
     align-self: center;
     width: 200px;
+    gap: 5px;
 `;
 
-const RandoSpellsList = styled(Items)`
+const RandoSpellsWrapper = ({
+    items,
+    onItemDeletion
+}: {
+    items: Item[];
+    onItemDeletion: (item: Item) => void;
+}) => {
+    return (
+        <Items
+            items={items}
+            $removableItems
+            onItemDeletion={onItemDeletion}
+        ></Items>
+    );
+};
+
+const RandoSpellsList = styled(RandoSpellsWrapper)`
     justify-content: center;
 `;
 
@@ -41,11 +59,29 @@ const RandoSpells = () => {
         if (stats) {
             updateLevelHistory(level, {
                 ...stats,
-                randoSpells: [...randoSpells, getRandoSpell()]
+                randoSpells: [
+                    ...randoSpells,
+                    { ...getRandoSpell(), id: getNextId(randoSpells) }
+                ]
             });
         }
 
         setLevelling(false);
+    };
+
+    const onItemDeletion = (item: Item) => {
+        const stats = levelHistory.get(level);
+
+        if (stats) {
+            const { randoSpells } = stats;
+            const newRandoSpells = randoSpells.filter(
+                (randoSpell) => randoSpell.id !== item.id
+            );
+            updateLevelHistory(level, {
+                ...stats,
+                randoSpells: newRandoSpells
+            });
+        }
     };
 
     useEffect(() => {
@@ -67,7 +103,10 @@ const RandoSpells = () => {
                     disabled={!levelling || level === 1 || level % 2 === 0}
                 ></LevelUpButton>
             </Header>
-            <RandoSpellsList items={randoSpells}></RandoSpellsList>
+            <RandoSpellsList
+                items={randoSpells}
+                onItemDeletion={onItemDeletion}
+            ></RandoSpellsList>
         </RandoSpellsDiv>
     );
 };

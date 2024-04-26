@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CharacterContext, textFont } from '../_lib/utils';
+import { CharacterContext, getNextId, textFont } from '../_lib/utils';
 import Modal from './Modal';
 import { useContext, useState } from 'react';
 import { Button } from './Buttons';
@@ -49,7 +49,10 @@ const AddEquipmentModal = ({ onClose }: { onClose: () => void }) => {
 
         if (currentStats) {
             const { equipment } = currentStats;
-            const newEquipment = [...equipment, { name, description }];
+            const newEquipment = [
+                ...equipment,
+                { name, description, id: getNextId(equipment) }
+            ];
             const newStats = { ...currentStats, equipment: newEquipment };
             updateLevelHistory(level, newStats);
         }

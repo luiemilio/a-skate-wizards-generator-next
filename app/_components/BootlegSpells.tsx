@@ -32,6 +32,22 @@ const BootlegSpells = () => {
         }
     }, [level, levelHistory]);
 
+    const onItemDeletion = (item: Item) => {
+        const currentStats = levelHistory.get(level);
+
+        if (currentStats) {
+            const { bootlegSpells } = currentStats;
+            const newBootLegSpells = bootlegSpells.filter(
+                (bootlegSpell) => bootlegSpell.id !== item.id
+            );
+            const newStats = {
+                ...currentStats,
+                bootlegSpells: newBootLegSpells
+            };
+            updateLevelHistory(level, newStats);
+        }
+    };
+
     return (
         <BootLegSpellsDiv>
             {showAddBootlegSpellModal && (
@@ -45,7 +61,12 @@ const BootlegSpells = () => {
                     onClick={() => setShowAddBootlegSpellModal(true)}
                 ></LevelUpButton>
             </SectionTitleDiv>
-            <Items items={bootlegSpells} highlightNames $removableItems></Items>
+            <Items
+                items={bootlegSpells}
+                highlightNames
+                $removableItems
+                onItemDeletion={onItemDeletion}
+            ></Items>
         </BootLegSpellsDiv>
     );
 };
