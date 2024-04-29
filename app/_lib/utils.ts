@@ -7,8 +7,9 @@ export type Item = {
     uuid?: string;
     name: string;
     description?: string;
-    id: number;
 };
+
+export type SavedItem = Item & { id: number };
 
 export type AbilityScores = {
     strength: number;
@@ -49,10 +50,10 @@ export interface Stats {
         dexterity: number;
         will: number;
     };
-    randoSpells: Item[];
-    bootlegSpells: Item[];
-    permSpells: Item[];
-    equipment: Item[];
+    randoSpells: SavedItem[];
+    bootlegSpells: SavedItem[];
+    permSpells: SavedItem[];
+    equipment: SavedItem[];
 }
 
 export type LevelHistory = Map<number, Stats>;
@@ -193,7 +194,9 @@ export const getRandomStats = (): Stats => {
         abilityScores,
         randoSpells: [{ ...randoSpell, id: 0 }],
         bootlegSpells: [{ ...bootlegSpell, id: 0 }],
-        permSpells: PERMANENT_SPELLS,
+        permSpells: PERMANENT_SPELLS.map((spell, idx) => {
+            return { name: spell.name, description: spell.description, id: idx };
+        }),
         equipment: equipment.map((item, idx) => {
             return { ...item, id: idx };
         })
@@ -228,6 +231,6 @@ export const parseLevelHistory = (stringifiedLevelHistory: string): LevelHistory
     return JSON.parse(stringifiedLevelHistory, reviver);
 };
 
-export const getNextId = (items: Item[]): number => {
+export const getNextId = (items: SavedItem[]): number => {
     return items.length > 0 ? items[items.length - 1].id + 1 : 0;
 };

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { Item } from '../_lib/utils';
+import { SavedItem, Item } from '../_lib/utils';
 import { RemoveItemButton } from './Buttons';
 
 export interface ItemsProps {
-    items: Item[];
+    items: SavedItem[];
     highlightNames?: boolean;
-    onItemDeletion?: (item: Item) => void;
+    onItemDeletion?: (item: SavedItem) => void;
     $removableItems?: boolean;
 }
 
@@ -54,7 +54,7 @@ export const ItemDescription = styled.div`
 export const Items = ({ items, highlightNames, onItemDeletion, $removableItems }: ItemsProps) => {
     return (
         <ItemsDiv>
-            {items?.map((item: Item) => {
+            {items?.map((item) => {
                 return (
                     <div key={`${item.name + Math.random() * 10000}`}>
                         <div>

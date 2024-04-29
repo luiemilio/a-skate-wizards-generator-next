@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { LevelUpButton } from './Buttons';
-import { CharacterContext, getNextId } from '../_lib/utils';
+import { CharacterContext, getNextId, SavedItem } from '../_lib/utils';
 import { Item, getRandoSpell } from '../_lib/utils';
 import styled from 'styled-components';
 import Items from './Items';
@@ -31,8 +31,8 @@ const RandoSpellsWrapper = ({
     items,
     onItemDeletion
 }: {
-    items: Item[];
-    onItemDeletion: (item: Item) => void;
+    items: SavedItem[];
+    onItemDeletion: (item: SavedItem) => void;
 }) => {
     return <Items items={items} $removableItems onItemDeletion={onItemDeletion}></Items>;
 };
@@ -45,7 +45,7 @@ const RandoSpells = () => {
     const { level, levelling, setLevelling, levelHistory, updateLevelHistory } =
         useContext(CharacterContext);
 
-    const [randoSpells, setRandoSpells] = useState<Item[]>([]);
+    const [randoSpells, setRandoSpells] = useState<SavedItem[]>([]);
 
     const addRandoSpell = () => {
         const stats = levelHistory.get(level);
@@ -60,7 +60,7 @@ const RandoSpells = () => {
         setLevelling(false);
     };
 
-    const onItemDeletion = (item: Item) => {
+    const onItemDeletion = (item: SavedItem) => {
         const stats = levelHistory.get(level);
 
         if (stats) {

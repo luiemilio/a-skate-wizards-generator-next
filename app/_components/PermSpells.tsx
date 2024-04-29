@@ -1,5 +1,5 @@
 import Items from './Items';
-import { CharacterContext, Item } from '../_lib/utils';
+import { CharacterContext, Item, SavedItem } from '../_lib/utils';
 import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Section, SectionName } from './Section';
@@ -19,7 +19,7 @@ const PermSpellsDiv = styled(Section)`
 
 const PermSpells = () => {
     const { level, levelHistory } = useContext(CharacterContext);
-    const [permSpells, setPermSpells] = useState<Item[]>([]);
+    const [permSpells, setPermSpells] = useState<SavedItem[]>([]);
 
     useEffect(() => {
         const stats = levelHistory.get(level);

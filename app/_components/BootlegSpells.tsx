@@ -1,5 +1,5 @@
 import Items from './Items';
-import { CharacterContext, Item, getBootlegSpell } from '../_lib/utils';
+import { CharacterContext, Item, SavedItem } from '../_lib/utils';
 import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Section, SectionName } from './Section';
@@ -17,7 +17,7 @@ const SectionTitleDiv = styled.div`
 
 const BootlegSpells = () => {
     const { level, levelHistory, updateLevelHistory } = useContext(CharacterContext);
-    const [bootlegSpells, setBootlegSpells] = useState<Item[]>([]);
+    const [bootlegSpells, setBootlegSpells] = useState<SavedItem[]>([]);
     const [showAddBootlegSpellModal, setShowAddBootlegSpellModal] = useState(false);
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const BootlegSpells = () => {
         }
     }, [level, levelHistory]);
 
-    const onItemDeletion = (item: Item) => {
+    const onItemDeletion = (item: SavedItem) => {
         const currentStats = levelHistory.get(level);
 
         if (currentStats) {

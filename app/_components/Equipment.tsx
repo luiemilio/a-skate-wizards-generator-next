@@ -1,5 +1,5 @@
 import Items from './Items';
-import { CharacterContext, Item } from '../_lib/utils';
+import { CharacterContext, SavedItem } from '../_lib/utils';
 import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Section, SectionName } from './Section';
@@ -22,7 +22,7 @@ const SectionTitleDiv = styled.div`
 
 export const Equipment = () => {
     const { level, levelHistory, updateLevelHistory } = useContext(CharacterContext);
-    const [equipment, setEquipment] = useState<Item[]>([]);
+    const [equipment, setEquipment] = useState<SavedItem[]>([]);
     const [showAddEquipmentModal, setShowAddEquipmentModal] = useState(false);
 
     useEffect(() => {

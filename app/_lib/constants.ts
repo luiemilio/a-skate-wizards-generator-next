@@ -1,8 +1,6 @@
 import type { Item } from './utils';
 
-type SavedItem = Omit<Item, 'id'>;
-
-export const ITEMS: SavedItem[] = [
+export const ITEMS: Item[] = [
     {
         name: 'Staff or Wand',
         description:
@@ -54,7 +52,7 @@ export const ITEMS: SavedItem[] = [
     }
 ];
 
-export const BOOTLEG_SPELLS: SavedItem[] = [
+export const BOOTLEG_SPELLS: Item[] = [
     {
         name: 'Mattress',
         description:
@@ -144,7 +142,7 @@ export const RANDO_SPELLS = [
     ]
 ];
 
-export const PERMANENT_SPELLS: SavedItem[] = [
+export const PERMANENT_SPELLS: Item[] = [
     {
         name: 'Ramp',
         description: 'A magical ramp about the size of a park bench appears below your skateboard.'

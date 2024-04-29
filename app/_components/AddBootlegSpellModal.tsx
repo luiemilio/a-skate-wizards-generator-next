@@ -1,9 +1,10 @@
 import styled from 'styled-components';
-import { CharacterContext, Item, getNextId, textFont } from '../_lib/utils';
+import { CharacterContext, getNextId } from '../_lib/utils';
 import Modal from './Modal';
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Button } from './Buttons';
 import { BOOTLEG_SPELLS } from '../_lib/constants';
+import type { Item, SavedItem } from '../_lib/utils';
 
 const AddBootlegSpellDiv = styled.div`
     border: 5px solid black;
@@ -83,7 +84,7 @@ const AddBootlegSpellModal = ({ onClose }: { onClose: () => void }) => {
 
         onClose();
     };
-
+    
     const onClick = (e: React.MouseEvent<HTMLLIElement>, spell: Item) => {
         setSelectedSpell(spell);
         setSelectedDescription(spell.description);
