@@ -39,7 +39,7 @@ const Details = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-`
+`;
 
 const SkateWizardsCredit = () => {
     return (
