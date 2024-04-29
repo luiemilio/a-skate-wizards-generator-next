@@ -4,8 +4,6 @@ import { CharacterContext } from '../_lib/utils';
 import styled from 'styled-components';
 import { ItemName } from './Items';
 import { Section, SectionName } from './Section';
-import Image from 'next/image';
-import fieldWizard from '../_assets/images/fieldwizard.png';
 
 type Ability = 'strength' | 'dexterity' | 'will';
 
@@ -96,7 +94,6 @@ const Abilities = () => {
         <AbilitiesDiv>
             <SectionName>Abilities</SectionName>
             <BottomDiv>
-                {/* <Image src={fieldWizard} alt='field wizard' width={200} height={300} /> */}
                 <ScoresDiv>
                     <Ability>
                         <ItemName name='Strength'></ItemName>
