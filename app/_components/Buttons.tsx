@@ -17,7 +17,7 @@ export const LevelButton = styled(Button)<{
     $disabled?: boolean;
 }>`
     pointer-events: ${(props) => (props.$disabled ? 'none' : 'auto')};
-    background: ${(props) => (props.$hidden ? 'none' : 'show')};
+    opacity: ${(props) => (props.$hidden ? 0 : 1)};
     height: 25px;
     width: 25px;
 `;
@@ -82,10 +82,6 @@ export const StyledLevelDownButton = styled(LevelDownButton)`
 
 export const RemoveItemButton = (props: any) => {
     return (
-        <StyledLevelDownButton
-            {...props}
-            imageHeight={20}
-            imageWidth={20}
-        ></StyledLevelDownButton>
+        <StyledLevelDownButton {...props} imageHeight={20} imageWidth={20}></StyledLevelDownButton>
     );
 };

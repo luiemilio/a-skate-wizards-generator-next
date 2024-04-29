@@ -21,8 +21,7 @@ const SectionTitleDiv = styled.div`
 `;
 
 export const Equipment = () => {
-    const { level, levelHistory, updateLevelHistory } =
-        useContext(CharacterContext);
+    const { level, levelHistory, updateLevelHistory } = useContext(CharacterContext);
     const [equipment, setEquipment] = useState<Item[]>([]);
     const [showAddEquipmentModal, setShowAddEquipmentModal] = useState(false);
 
@@ -41,9 +40,7 @@ export const Equipment = () => {
 
         if (currentStats) {
             const { equipment } = currentStats;
-            const newEquipment = equipment.filter(
-                (equipment) => equipment.id !== item.id
-            );
+            const newEquipment = equipment.filter((equipment) => equipment.id !== item.id);
             const newStats = { ...currentStats, equipment: newEquipment };
             updateLevelHistory(level, newStats);
         }
@@ -59,9 +56,7 @@ export const Equipment = () => {
             <SectionTitleDiv>
                 <Image src={skateKey} alt='skate key' width={50} height={50} />
                 <SectionName>Equipment</SectionName>
-                <LevelUpButton
-                    onClick={() => setShowAddEquipmentModal(true)}
-                ></LevelUpButton>
+                <LevelUpButton onClick={() => setShowAddEquipmentModal(true)}></LevelUpButton>
                 <Image src={tape} alt='tape' width={50} height={50} />
             </SectionTitleDiv>
             <Items

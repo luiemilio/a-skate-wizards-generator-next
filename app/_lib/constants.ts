@@ -1,6 +1,8 @@
 import type { Item } from './utils';
 
-export const ITEMS: Item[] = [
+type SavedItem = Omit<Item, 'id'>;
+
+export const ITEMS: SavedItem[] = [
     {
         name: 'Staff or Wand',
         description:
@@ -8,13 +10,11 @@ export const ITEMS: Item[] = [
     },
     {
         name: 'Skate Key',
-        description:
-            ' Once a day you can fine-tune your board and receive +1 Health.'
+        description: ' Once a day you can fine-tune your board and receive +1 Health.'
     },
     {
         name: 'Smoking Pipe',
-        description:
-            'Puffing the sacred smoke prior to a roll provides Advantage once per day.'
+        description: 'Puffing the sacred smoke prior to a roll provides Advantage once per day.'
     },
     {
         name: 'Shield',
@@ -23,13 +23,11 @@ export const ITEMS: Item[] = [
     },
     {
         name: 'Melee Weapon',
-        description:
-            'Adds +1 Damage but not to Attack Rolls (i.e. a knife, sword or mace).'
+        description: 'Adds +1 Damage but not to Attack Rolls (i.e. a knife, sword or mace).'
     },
     {
         name: 'Ranged Weapon',
-        description:
-            'Adds +1 Damage but not to Attack Rolls (i.e. a bow or crossbow).'
+        description: 'Adds +1 Damage but not to Attack Rolls (i.e. a bow or crossbow).'
     },
     {
         name: 'Lore from Yore',
@@ -38,8 +36,7 @@ export const ITEMS: Item[] = [
     },
     {
         name: 'Lockpicking Tools',
-        description:
-            "Used by many Skate Wizards to get into the archmage's secret stash."
+        description: "Used by many Skate Wizards to get into the archmage's secret stash."
     },
     {
         name: 'Oil Flask',
@@ -48,8 +45,7 @@ export const ITEMS: Item[] = [
     { name: 'Rope', description: 'Made of hemp, obvi.' },
     {
         name: 'Torch & Tinder',
-        description:
-            'A beautiful monogrammed matching set received on your last birthday.'
+        description: 'A beautiful monogrammed matching set received on your last birthday.'
     },
     {
         name: 'Ball Bearings',
@@ -58,7 +54,7 @@ export const ITEMS: Item[] = [
     }
 ];
 
-export const BOOTLEG_SPELLS: Item[] = [
+export const BOOTLEG_SPELLS: SavedItem[] = [
     {
         name: 'Mattress',
         description:
@@ -66,13 +62,11 @@ export const BOOTLEG_SPELLS: Item[] = [
     },
     {
         name: 'Wannabe',
-        description:
-            'Disguise yourself as any creature of your relative dimensions.'
+        description: 'Disguise yourself as any creature of your relative dimensions.'
     },
     {
         name: 'Trailblaze',
-        description:
-            "Leave a trail of fire in your skate-board's wake for a full minute."
+        description: "Leave a trail of fire in your skate-board's wake for a full minute."
     },
     {
         name: 'Sweet Jamz',
@@ -150,11 +144,10 @@ export const RANDO_SPELLS = [
     ]
 ];
 
-export const PERMANENT_SPELLS: Item[] = [
+export const PERMANENT_SPELLS: SavedItem[] = [
     {
         name: 'Ramp',
-        description:
-            'A magical ramp about the size of a park bench appears below your skateboard.'
+        description: 'A magical ramp about the size of a park bench appears below your skateboard.'
     },
     {
         name: 'Sidewalk',

@@ -6,20 +6,13 @@ import styled from 'styled-components';
 const LevelUpDiv = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 130px;
+    justify-content: space-around;
     gap: 5px;
 `;
 
 const LevelUp = () => {
-    const {
-        level,
-        levelling,
-        setLevel,
-        setLevelling,
-        levelHistory,
-        updateLevelHistory
-    } = useContext(CharacterContext);
+    const { level, levelling, setLevel, setLevelling, levelHistory, updateLevelHistory } =
+        useContext(CharacterContext);
 
     const levelDown = () => {
         if (level > 1) {
@@ -46,15 +39,9 @@ const LevelUp = () => {
 
     return (
         <LevelUpDiv>
-            <LevelDownButton
-                onClick={levelDown}
-                disabled={levelling}
-            ></LevelDownButton>
+            <LevelDownButton onClick={levelDown} disabled={levelling}></LevelDownButton>
             <div>Level {level}</div>
-            <LevelUpButton
-                onClick={levelUp}
-                disabled={levelling}
-            ></LevelUpButton>
+            <LevelUpButton onClick={levelUp} disabled={levelling}></LevelUpButton>
         </LevelUpDiv>
     );
 };

@@ -46,8 +46,7 @@ const SpellLi = styled.li<{ $selected?: boolean }>`
     padding-right: 10px;
 
     &:hover {
-        background-color: ${(props) =>
-            props.$selected ? 'gray' : 'lightgray'};
+        background-color: ${(props) => (props.$selected ? 'gray' : 'lightgray')};
     }
 
     background-color: ${(props) => (props.$selected ? 'gray' : 'none')};
@@ -60,8 +59,7 @@ const Description = styled.div`
 `;
 
 const AddBootlegSpellModal = ({ onClose }: { onClose: () => void }) => {
-    const { level, levelHistory, updateLevelHistory } =
-        useContext(CharacterContext);
+    const { level, levelHistory, updateLevelHistory } = useContext(CharacterContext);
 
     const [selectedSpell, setSelectedSpell] = useState<Item>();
     const [selectedDescription, setSelectedDescription] = useState<string>();

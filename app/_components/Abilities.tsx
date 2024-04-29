@@ -96,12 +96,7 @@ const Abilities = () => {
         <AbilitiesDiv>
             <SectionName>Abilities</SectionName>
             <BottomDiv>
-                <Image
-                    src={fieldWizard}
-                    alt='field wizard'
-                    width={200}
-                    height={300}
-                />
+                {/* <Image src={fieldWizard} alt='field wizard' width={200} height={300} /> */}
                 <ScoresDiv>
                     <Ability>
                         <ItemName name='Strength'></ItemName>

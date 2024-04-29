@@ -8,14 +8,17 @@ const CharSaverDiv = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
+    
     * {
         box-sizing: border-box;
     }
-    height: 30px;
 `;
 
 const NameInput = styled.input`
-    height: 100%;
+    height: 35px;
+    border: none;
+    border: 1px solid black;
+    border-radius: 4px;
 `;
 
 const SaveButton = styled.button`
@@ -24,7 +27,7 @@ const SaveButton = styled.button`
     background-color: black;
     color: white;
     text-align: center;
-    padding: 3px;
+    padding: 5px;
     font-size: 0.9em;
     height: 100%;
     cursor: pointer;
@@ -46,10 +49,7 @@ const CharSaver = ({
     return (
         <CharSaverDiv>
             <label>Name</label>
-            <NameInput
-                onChange={(e) => setName(e.currentTarget.value)}
-                value={name}
-            ></NameInput>
+            <NameInput onChange={(e) => setName(e.currentTarget.value)} value={name}></NameInput>
             <SaveButton className={textFont.className} onClick={handleSave}>
                 Save
             </SaveButton>

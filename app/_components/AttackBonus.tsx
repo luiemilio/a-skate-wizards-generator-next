@@ -7,7 +7,6 @@ import styled from 'styled-components';
 const AttackBonusDiv = styled.div`
     display: flex;
     gap: 5px;
-    width: 200px;
     align-items: center;
 `;
 

@@ -2,11 +2,7 @@ import { TrickButton } from './Buttons';
 import { textFont } from '../_lib/utils';
 import { useState } from 'react';
 
-const ClickTrick = ({
-    setShowTrickModal
-}: {
-    setShowTrickModal: (boolean: boolean) => void;
-}) => {
+const ClickTrick = ({ setShowTrickModal }: { setShowTrickModal: (boolean: boolean) => void }) => {
     const [rotate, setRotate] = useState(false);
 
     const trickClick = () => {

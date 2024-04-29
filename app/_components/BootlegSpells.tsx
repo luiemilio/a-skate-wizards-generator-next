@@ -16,11 +16,9 @@ const SectionTitleDiv = styled.div`
 `;
 
 const BootlegSpells = () => {
-    const { level, levelHistory, updateLevelHistory } =
-        useContext(CharacterContext);
+    const { level, levelHistory, updateLevelHistory } = useContext(CharacterContext);
     const [bootlegSpells, setBootlegSpells] = useState<Item[]>([]);
-    const [showAddBootlegSpellModal, setShowAddBootlegSpellModal] =
-        useState(false);
+    const [showAddBootlegSpellModal, setShowAddBootlegSpellModal] = useState(false);
 
     useEffect(() => {
         const currentStats = levelHistory.get(level);
@@ -57,9 +55,7 @@ const BootlegSpells = () => {
             )}
             <SectionTitleDiv>
                 <SectionName>Bootleg Spells</SectionName>
-                <LevelUpButton
-                    onClick={() => setShowAddBootlegSpellModal(true)}
-                ></LevelUpButton>
+                <LevelUpButton onClick={() => setShowAddBootlegSpellModal(true)}></LevelUpButton>
             </SectionTitleDiv>
             <Items
                 items={bootlegSpells}

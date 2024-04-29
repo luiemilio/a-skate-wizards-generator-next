@@ -11,17 +11,13 @@ import {
 import StatusBar from '@/app/_components/StatusBar';
 import Character from '@/app/_components/Character';
 import styled from 'styled-components';
-import BailOut from '@/app/_components/BailOutButton';
-import CharController from '@/app/_components/CharHandler';
-import TrickModal from '@/app/_components/TrickModal';
-import ClickTrick from '@/app/_components/TrickClick';
+import CharController from '@/app/_components/CharController';
 
 const Main = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    row-gap: 20px;
+    gap: 20px;
     max-width: 1350px;
     font-size: 1.5em;
 `;
@@ -31,11 +27,6 @@ const Title = styled.div`
     text-align: center;
 `;
 
-const MainButtons = styled.div`
-    display: flex;
-    gap: 50px;
-`;
-
 const SkateWizardCreditDiv = styled.div`
     align-self: flex-start;
 `;
@@ -43,6 +34,12 @@ const SkateWizardCreditDiv = styled.div`
 const Credit = styled.p`
     font-size: 0.7em;
 `;
+
+const Details = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+`
 
 const SkateWizardsCredit = () => {
     return (
@@ -65,7 +62,6 @@ const Generator = () => {
     const [level, setLevel] = useState(1);
     const [levelling, setLevelling] = useState(false);
     const [name, setName] = useState('');
-    const [showTrickModal, setShowTrickModal] = useState(false);
 
     const updateLevelHistory = (level: number, stats: Stats) => {
         setLevelHistory(new Map(levelHistory.set(level, stats)));
@@ -96,23 +92,12 @@ const Generator = () => {
             }}
         >
             <Main className={textFont.className}>
-                {showTrickModal && (
-                    <TrickModal
-                        onClose={() => setShowTrickModal(false)}
-                    ></TrickModal>
-                )}
-                <Title className={titleFont.className}>
-                    A Skate Wizards Generator
-                </Title>
-                <MainButtons>
-                    <ClickTrick
-                        setShowTrickModal={setShowTrickModal}
-                    ></ClickTrick>
-                    <BailOut></BailOut>
-                </MainButtons>
+                <Title className={titleFont.className}>A Skate Wizards Generator</Title>
                 <CharController></CharController>
-                <StatusBar></StatusBar>
-                <Character></Character>
+                <Details>
+                    <StatusBar></StatusBar>
+                    <Character></Character>
+                </Details>
                 <SkateWizardsCredit></SkateWizardsCredit>
             </Main>
         </CharacterContext.Provider>

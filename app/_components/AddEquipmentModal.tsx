@@ -39,8 +39,7 @@ const DescriptionInput = styled.textarea`
 `;
 
 const AddEquipmentModal = ({ onClose }: { onClose: () => void }) => {
-    const { level, levelHistory, updateLevelHistory } =
-        useContext(CharacterContext);
+    const { level, levelHistory, updateLevelHistory } = useContext(CharacterContext);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 
@@ -49,10 +48,7 @@ const AddEquipmentModal = ({ onClose }: { onClose: () => void }) => {
 
         if (currentStats) {
             const { equipment } = currentStats;
-            const newEquipment = [
-                ...equipment,
-                { name, description, id: getNextId(equipment) }
-            ];
+            const newEquipment = [...equipment, { name, description, id: getNextId(equipment) }];
             const newStats = { ...currentStats, equipment: newEquipment };
             updateLevelHistory(level, newStats);
         }

@@ -1,13 +1,7 @@
 import * as crypto from 'crypto';
 import { createContext, Dispatch, SetStateAction } from 'react';
 import localFont from 'next/font/local';
-import {
-    ITEMS,
-    RANDO_SPELLS,
-    BOOTLEG_SPELLS,
-    STARTING_STATS,
-    PERMANENT_SPELLS
-} from './constants';
+import { ITEMS, RANDO_SPELLS, BOOTLEG_SPELLS, STARTING_STATS, PERMANENT_SPELLS } from './constants';
 
 export type Item = {
     uuid?: string;
@@ -139,11 +133,7 @@ export const getEquipment = (): Item[] => {
     while (selectedEquipment.length < 3) {
         const rolledItem = getRandomElement(ITEMS) as Item;
 
-        if (
-            !selectedEquipment.some(
-                (selectedItem) => selectedItem.name === rolledItem.name
-            )
-        ) {
+        if (!selectedEquipment.some((selectedItem) => selectedItem.name === rolledItem.name)) {
             selectedEquipment.push(rolledItem);
         }
     }
@@ -152,9 +142,7 @@ export const getEquipment = (): Item[] => {
 };
 
 export const getRandoSpell = (): Item => {
-    const name = RANDO_SPELLS.map((wordList) =>
-        getRandomElement(wordList)
-    ).join(' ');
+    const name = RANDO_SPELLS.map((wordList) => getRandomElement(wordList)).join(' ');
 
     return {
         name
@@ -227,9 +215,7 @@ const replacer = (_: any, value: any): any => {
 };
 
 const reviver = (_: any, value: any): any => {
-    return typeof value === 'object' &&
-        value !== null &&
-        value.dataType === 'Map'
+    return typeof value === 'object' && value !== null && value.dataType === 'Map'
         ? new Map(value.value)
         : value;
 };
@@ -238,9 +224,7 @@ export const stringifyLevelHistory = (levelHistory: LevelHistory): string => {
     return JSON.stringify(levelHistory, replacer);
 };
 
-export const parseLevelHistory = (
-    stringifiedLevelHistory: string
-): LevelHistory => {
+export const parseLevelHistory = (stringifiedLevelHistory: string): LevelHistory => {
     return JSON.parse(stringifiedLevelHistory, reviver);
 };
 

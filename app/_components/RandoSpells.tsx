@@ -34,13 +34,7 @@ const RandoSpellsWrapper = ({
     items: Item[];
     onItemDeletion: (item: Item) => void;
 }) => {
-    return (
-        <Items
-            items={items}
-            $removableItems
-            onItemDeletion={onItemDeletion}
-        ></Items>
-    );
+    return <Items items={items} $removableItems onItemDeletion={onItemDeletion}></Items>;
 };
 
 const RandoSpellsList = styled(RandoSpellsWrapper)`
@@ -59,10 +53,7 @@ const RandoSpells = () => {
         if (stats) {
             updateLevelHistory(level, {
                 ...stats,
-                randoSpells: [
-                    ...randoSpells,
-                    { ...getRandoSpell(), id: getNextId(randoSpells) }
-                ]
+                randoSpells: [...randoSpells, { ...getRandoSpell(), id: getNextId(randoSpells) }]
             });
         }
 
@@ -74,9 +65,7 @@ const RandoSpells = () => {
 
         if (stats) {
             const { randoSpells } = stats;
-            const newRandoSpells = randoSpells.filter(
-                (randoSpell) => randoSpell.id !== item.id
-            );
+            const newRandoSpells = randoSpells.filter((randoSpell) => randoSpell.id !== item.id);
             updateLevelHistory(level, {
                 ...stats,
                 randoSpells: newRandoSpells
@@ -103,10 +92,7 @@ const RandoSpells = () => {
                     disabled={!levelling || level === 1 || level % 2 === 0}
                 ></LevelUpButton>
             </Header>
-            <RandoSpellsList
-                items={randoSpells}
-                onItemDeletion={onItemDeletion}
-            ></RandoSpellsList>
+            <RandoSpellsList items={randoSpells} onItemDeletion={onItemDeletion}></RandoSpellsList>
         </RandoSpellsDiv>
     );
 };

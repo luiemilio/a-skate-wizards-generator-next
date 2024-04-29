@@ -1,8 +1,4 @@
-import {
-    LevelHistory,
-    parseLevelHistory,
-    stringifyLevelHistory
-} from './utils';
+import { LevelHistory, parseLevelHistory, stringifyLevelHistory } from './utils';
 
 const NAME_PREFIX = 'wizard-';
 

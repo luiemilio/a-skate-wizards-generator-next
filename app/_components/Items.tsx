@@ -51,12 +51,7 @@ export const ItemDescription = styled.div`
     padding-left: 10px;
 `;
 
-export const Items = ({
-    items,
-    highlightNames,
-    onItemDeletion,
-    $removableItems
-}: ItemsProps) => {
+export const Items = ({ items, highlightNames, onItemDeletion, $removableItems }: ItemsProps) => {
     return (
         <ItemsDiv>
             {items?.map((item: Item) => {
@@ -68,9 +63,7 @@ export const Items = ({
                                 name={item.name}
                                 $removableItems={$removableItems}
                                 deleteItem={() =>
-                                    onItemDeletion
-                                        ? onItemDeletion(item)
-                                        : undefined
+                                    onItemDeletion ? onItemDeletion(item) : undefined
                                 }
                             ></ItemName>
                         </div>

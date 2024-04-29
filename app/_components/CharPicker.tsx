@@ -1,20 +1,20 @@
 import styled from 'styled-components';
 import { CharacterContext, textFont } from '../_lib/utils';
 import React, { useContext, useEffect, useState } from 'react';
-import { getAllSavedWizardNames, getLevelHistory } from '../_lib/db';
+import { getLevelHistory } from '../_lib/db';
 
 const CharPickerDiv = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
+    
     * {
         box-sizing: border-box;
     }
-    height: 30px;
 `;
 
 const SelectChar = styled.select`
-    height: 100%;
+    height: 30px;
     width: 155px;
 `;
 
@@ -24,15 +24,13 @@ const LoadButton = styled.button`
     background-color: black;
     color: white;
     text-align: center;
-    padding: 3px;
+    padding: 5px;
     font-size: 0.9em;
-    height: 100%;
     cursor: pointer;
 `;
 
 const CharPicker = ({ savedWizards }: { savedWizards: string[] }) => {
-    const { setLevel, replaceLevelHistory, name, setName } =
-        useContext(CharacterContext);
+    const { setLevel, replaceLevelHistory, name, setName } = useContext(CharacterContext);
     const [selectedName, setSelectedName] = useState('');
 
     const onNameSelected = (e: React.FormEvent<HTMLSelectElement>) => {
@@ -68,9 +66,7 @@ const CharPicker = ({ savedWizards }: { savedWizards: string[] }) => {
     return (
         <CharPickerDiv>
             <label>Wizard Warehouse</label>
-            <SelectChar onChange={onNameSelected}>
-                {populateWizards()}
-            </SelectChar>
+            <SelectChar onChange={onNameSelected}>{populateWizards()}</SelectChar>
             <LoadButton className={textFont.className} onClick={handleLoad}>
                 Load
             </LoadButton>
