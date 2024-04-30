@@ -84,7 +84,7 @@ const AddBootlegSpellModal = ({ onClose }: { onClose: () => void }) => {
 
         onClose();
     };
-    
+
     const onClick = (e: React.MouseEvent<HTMLLIElement>, spell: Item) => {
         setSelectedSpell(spell);
         setSelectedDescription(spell.description);
