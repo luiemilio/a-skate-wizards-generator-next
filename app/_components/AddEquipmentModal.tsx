@@ -29,6 +29,9 @@ const AddButton = styled(Button)`
 const NameInput = styled.input`
     width: 200px;
     font-size: 0.8em;
+    border: none;
+    border: 1px solid black;
+    border-radius: 4px;
 `;
 
 const DescriptionInput = styled.textarea`
@@ -36,6 +39,9 @@ const DescriptionInput = styled.textarea`
     height: 200px;
     resize: none;
     font-size: 0.8em;
+    border: none;
+    border: 1px solid black;
+    border-radius: 4px;
 `;
 
 const AddEquipmentModal = ({ onClose }: { onClose: () => void }) => {

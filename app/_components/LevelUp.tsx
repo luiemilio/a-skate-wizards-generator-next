@@ -10,6 +10,10 @@ const LevelUpDiv = styled.div`
     gap: 5px;
 `;
 
+const LevelIndicator = styled.div`
+    font-size: 1.3em;
+`;
+
 const LevelUp = () => {
     const { level, levelling, setLevel, setLevelling, levelHistory, updateLevelHistory } =
         useContext(CharacterContext);
@@ -40,7 +44,7 @@ const LevelUp = () => {
     return (
         <LevelUpDiv>
             <LevelDownButton onClick={levelDown} disabled={levelling}></LevelDownButton>
-            <div>Level {level}</div>
+            <LevelIndicator>Level {level}</LevelIndicator>
             <LevelUpButton onClick={levelUp} disabled={levelling}></LevelUpButton>
         </LevelUpDiv>
     );
