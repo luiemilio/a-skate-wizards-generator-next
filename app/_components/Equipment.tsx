@@ -54,10 +54,8 @@ export const Equipment = () => {
                 ></AddEquipmentModal>
             )}
             <SectionTitleDiv>
-                <Image src={skateKey} alt='skate key' width={50} height={50} />
                 <SectionName>Equipment</SectionName>
                 <LevelUpButton onClick={() => setShowAddEquipmentModal(true)}></LevelUpButton>
-                <Image src={tape} alt='tape' width={50} height={50} />
             </SectionTitleDiv>
             <Items
                 items={equipment}
