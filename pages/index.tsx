@@ -129,14 +129,14 @@ const Generator = () => {
         const initialStats = getRandomStats();
         const initialLevelMap = new Map([[1, initialStats]]);
         const savedWizards = getAllSavedWizardNames();
-        
+
         setLevelHistory(initialLevelMap);
         setSavedWizards(savedWizards);
     }, []);
 
     useEffect(() => {
         setSaved(false);
-    }, [levelHistory])
+    }, [levelHistory]);
 
     return (
         <SavedWizardsContext.Provider
@@ -156,7 +156,7 @@ const Generator = () => {
                     setLevel,
                     levelling,
                     setLevelling,
-                    saved, 
+                    saved,
                     setSaved
                 }}
             >

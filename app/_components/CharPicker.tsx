@@ -1,5 +1,11 @@
 import styled from 'styled-components';
-import { CharacterContext, SavedWizardsContext, textFont, Stats, normalizePropName } from '../_lib/utils';
+import {
+    CharacterContext,
+    SavedWizardsContext,
+    textFont,
+    Stats,
+    normalizePropName
+} from '../_lib/utils';
 import React, { useContext, useEffect, useState } from 'react';
 import { deleteWizard, getLevelHistory } from '../_lib/db';
 import { Button } from './Buttons';
@@ -89,7 +95,10 @@ const Description = ({ stats }: { stats?: Stats & { level: number } }) => {
                 <DescriptionUl>
                     {Object.entries(validStats).map(([key, value]) => {
                         return (
-                            <DescriptionLi key={`${key}-${Math.random() * 1000}`} value={`${key}: ${value}`}>
+                            <DescriptionLi
+                                key={`${key}-${Math.random() * 1000}`}
+                                value={`${key}: ${value}`}
+                            >
                                 {`${normalizePropName(key)}: ${value}`}
                             </DescriptionLi>
                         );
@@ -99,11 +108,7 @@ const Description = ({ stats }: { stats?: Stats & { level: number } }) => {
         }
     };
 
-    return (
-        <DescriptionDiv>
-            {populateStats()}
-        </DescriptionDiv>
-    );
+    return <DescriptionDiv>{populateStats()}</DescriptionDiv>;
 };
 
 const Buttons = styled.div`
@@ -135,7 +140,7 @@ const CharPicker = ({ onClose }: { onClose: () => void }) => {
 
     useEffect(() => {
         updateSelectedWizard(savedWizards[0]);
-    }, []);
+    });
 
     const onClick = (e: React.MouseEvent<HTMLLIElement>, wizard: string) => {
         updateSelectedWizard(wizard);
@@ -165,11 +170,11 @@ const CharPicker = ({ onClose }: { onClose: () => void }) => {
             setSavedWizards(newWizards);
             setSelectedStats(undefined);
             setSelectedWizard(newWizards[idx > 0 ? idx - 1 : 0]);
-            
+
             if (name === selectedWizard) {
                 setSaved(false);
             }
-            
+
             if (newWizards.length === 0) {
                 onClose();
             }
