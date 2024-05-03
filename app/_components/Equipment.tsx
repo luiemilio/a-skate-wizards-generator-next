@@ -5,9 +5,6 @@ import styled from 'styled-components';
 import { Section, SectionName } from './Section';
 import { LevelUpButton } from './Buttons';
 import AddEquipmentModal from './AddEquipmentModal';
-import Image from 'next/image';
-import skateKey from '../_assets/images/skatekey.png';
-import tape from '../_assets/images/tape.png';
 
 const EquipmentDiv = styled(Section)`
     border-bottom: 1px solid black;

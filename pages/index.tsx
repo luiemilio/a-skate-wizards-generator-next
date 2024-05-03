@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import {
     CharacterContext,
+    SavedWizardsContext,
     LevelHistory,
     Stats,
     getRandomStats,
@@ -12,23 +13,39 @@ import StatusBar from '@/app/_components/StatusBar';
 import Character from '@/app/_components/Character';
 import styled from 'styled-components';
 import CharController from '@/app/_components/CharController';
+import { AnimatedWizard } from '@/app/_components/AnimatedWizard';
+import chillWizardOnSkateBoard from '../app/_assets/images/wizardchillonskateboard.png';
+import wizardOnMushroom from '../app/_assets/images/wizardonmushroom.png';
+import LevelUp from '@/app/_components/LevelUp';
+import { getAllSavedWizardNames } from '@/app/_lib/db';
+import CharSaver from '@/app/_components/CharSaver';
 
 const Main = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 20px;
-    max-width: 1350px;
     font-size: 1.5em;
 `;
 
-const Title = styled.div`
-    font-size: 4.2em;
+const TitleDiv = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 700px;
+`;
+
+const TitleHeader = styled.header`
+    font-size: 3.2em;
     text-align: center;
 `;
 
 const SkateWizardCreditDiv = styled.div`
     align-self: flex-start;
+    padding: 10px;
 `;
 
 const Credit = styled.p`
@@ -38,7 +55,18 @@ const Credit = styled.p`
 const Details = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     width: 100%;
+`;
+
+const NameAndLevelWrapper = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
 `;
 
 const SkateWizardsCredit = () => {
@@ -57,11 +85,37 @@ const SkateWizardsCredit = () => {
     );
 };
 
+const Title = () => {
+    return (
+        <TitleDiv>
+            <AnimatedWizard
+                animationid='chillWizard'
+                src={chillWizardOnSkateBoard}
+                alt='chill wizard'
+                width={100}
+                height={60}
+                trick='front-flip'
+            />
+            <TitleHeader className={titleFont.className}>A Skate Wizards Generator</TitleHeader>
+            <AnimatedWizard
+                animationid='mushroomWizard'
+                src={wizardOnMushroom}
+                alt='mushroom wizard'
+                width={70}
+                height={70}
+                trick='blast-off'
+            />
+        </TitleDiv>
+    );
+};
+
 const Generator = () => {
     const [levelHistory, setLevelHistory] = useState(new Map());
     const [level, setLevel] = useState(1);
     const [levelling, setLevelling] = useState(false);
     const [name, setName] = useState('');
+    const [savedWizards, setSavedWizards] = useState<string[]>([]);
+    const [saved, setSaved] = useState<boolean>(false);
 
     const updateLevelHistory = (level: number, stats: Stats) => {
         setLevelHistory(new Map(levelHistory.set(level, stats)));
@@ -74,33 +128,53 @@ const Generator = () => {
     useEffect(() => {
         const initialStats = getRandomStats();
         const initialLevelMap = new Map([[1, initialStats]]);
+        const savedWizards = getAllSavedWizardNames();
+        
         setLevelHistory(initialLevelMap);
+        setSavedWizards(savedWizards);
     }, []);
 
+    useEffect(() => {
+        setSaved(false);
+    }, [levelHistory])
+
     return (
-        <CharacterContext.Provider
+        <SavedWizardsContext.Provider
             value={{
-                name,
-                setName,
-                levelHistory,
-                updateLevelHistory,
-                replaceLevelHistory,
-                level,
-                setLevel,
-                levelling,
-                setLevelling
+                savedWizards,
+                setSavedWizards
             }}
         >
-            <Main className={textFont.className}>
-                <Title className={titleFont.className}>A Skate Wizards Generator</Title>
-                <CharController></CharController>
-                <Details>
-                    <StatusBar></StatusBar>
-                    <Character></Character>
-                </Details>
-                <SkateWizardsCredit></SkateWizardsCredit>
-            </Main>
-        </CharacterContext.Provider>
+            <CharacterContext.Provider
+                value={{
+                    name,
+                    setName,
+                    levelHistory,
+                    updateLevelHistory,
+                    replaceLevelHistory,
+                    level,
+                    setLevel,
+                    levelling,
+                    setLevelling,
+                    saved, 
+                    setSaved
+                }}
+            >
+                <Main className={textFont.className}>
+                    <Title />
+                    <CharController></CharController>
+                    <Details>
+                        <NameAndLevelWrapper>
+                            <CharSaver />
+                            <LevelUp></LevelUp>
+                        </NameAndLevelWrapper>
+                        <StatusBar></StatusBar>
+                        <Character></Character>
+                    </Details>
+                    <SkateWizardsCredit></SkateWizardsCredit>
+                </Main>
+            </CharacterContext.Provider>
+        </SavedWizardsContext.Provider>
     );
 };
 

@@ -68,6 +68,13 @@ export interface CharacterContext {
     setLevel: Dispatch<SetStateAction<number>>;
     levelling: boolean;
     setLevelling: Dispatch<SetStateAction<boolean>>;
+    saved: boolean;
+    setSaved: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface SavedWizardsContext {
+    savedWizards: string[];
+    setSavedWizards: Dispatch<SetStateAction<string[]>>;
 }
 
 export type StatusOptions = Partial<Status>;
@@ -81,8 +88,15 @@ export const CharacterContext = createContext({
     level: 0,
     setLevel: () => {},
     levelling: false,
-    setLevelling: () => {}
+    setLevelling: () => {},
+    saved: false,
+    setSaved: () => {}
 } as CharacterContext);
+
+export const SavedWizardsContext = createContext({
+    savedWizards: [],
+    setSavedWizards: () => {}
+} as SavedWizardsContext);
 
 export const textFont = localFont({
     src: '../_assets/fonts/HyningsHandwritingV2-Regular.ttf'
@@ -154,7 +168,7 @@ export const getBootlegSpell = (): Item => {
     return getRandomElement(BOOTLEG_SPELLS) as Item;
 };
 
-const normalizePropName = (str: string): string => {
+export const normalizePropName = (str: string): string => {
     if (str.length <= 2) {
         return str.toUpperCase();
     }

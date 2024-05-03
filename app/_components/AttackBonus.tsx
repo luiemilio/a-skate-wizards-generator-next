@@ -1,13 +1,19 @@
 import { useContext, useEffect, useState } from 'react';
-import styles from '../page.module.css';
 import { LevelUpButton } from './Buttons';
 import { CharacterContext } from '../_lib/utils';
 import styled from 'styled-components';
 
 const AttackBonusDiv = styled.div`
     display: flex;
-    gap: 5px;
     align-items: center;
+    justify-content: space-between;
+    width: 180px;
+`;
+
+const AttackBonusInfo = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 50px;
 `;
 
 const AttackBonus = () => {
@@ -40,12 +46,15 @@ const AttackBonus = () => {
 
     return (
         <AttackBonusDiv>
-            <div>{`Attack Bonus: ${attackBonus}`}</div>
-            <LevelUpButton
-                onClick={increaseAttackBonus}
-                hidden={!levelling || level === 1 || level % 2 === 0}
-                disabled={!levelling || level === 1 || level % 2 === 0}
-            ></LevelUpButton>
+            <p>Attack Bonus</p>
+            <AttackBonusInfo>
+                <p>{attackBonus}</p>
+                <LevelUpButton
+                    onClick={increaseAttackBonus}
+                    hidden={!levelling || level === 1 || level % 2 === 0}
+                    disabled={!levelling || level === 1 || level % 2 === 0}
+                ></LevelUpButton>
+            </AttackBonusInfo>
         </AttackBonusDiv>
     );
 };

@@ -15,12 +15,12 @@ const ItemsDiv = styled.div`
     overflow-y: scroll;
 `;
 
-const ItemNameDiv = styled.div<{ $highlight?: boolean }>`
+const ItemNameDiv = styled.div<{ $highlight?: boolean; $bold?: boolean }>`
     display: flex;
     align-items: center;
     gap: 5px;
     padding-left: 10px;
-    font-weight: 600;
+    font-weight: ${(props) => (props.$bold ? '600' : 'auto')};
     text-decoration: ${(props) => (props.$highlight ? 'underline' : 'auto')};
 `;
 
@@ -28,21 +28,26 @@ export const ItemName = ({
     $highlight,
     name,
     $removableItems,
-    deleteItem
+    $bold,
+    deleteItem,
+    children
 }: {
     $highlight?: boolean;
     name: string;
     $removableItems?: boolean;
     deleteItem?: () => void;
+    $bold?: boolean;
+    children?: React.ReactNode;
 }) => {
     return (
-        <ItemNameDiv $highlight={$highlight}>
+        <ItemNameDiv $bold={$bold} $highlight={$highlight}>
             {$removableItems && (
                 <RemoveItemButton
                     onClick={() => (deleteItem ? deleteItem() : undefined)}
                 ></RemoveItemButton>
             )}
             <p>{name}</p>
+            {children}
         </ItemNameDiv>
     );
 };

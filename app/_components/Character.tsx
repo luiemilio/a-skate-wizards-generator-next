@@ -23,7 +23,6 @@ const Character = () => {
     return (
         <CharacterMainDiv>
             <CharacterTopAndBottom>
-                <Abilities></Abilities>
                 <PermSpells></PermSpells>
                 <Equipment></Equipment>
             </CharacterTopAndBottom>

@@ -44,3 +44,10 @@ export const getAllSavedWizardNames = (): string[] => {
 
     return savedWizards;
 };
+
+export const deleteWizard = (name: string): void => {
+    if (hasLocalStorage) {
+        const storedName = `${NAME_PREFIX}${name}`;
+        localStorage.removeItem(storedName);
+    }
+};

@@ -1,55 +1,47 @@
-import CharSaver from './CharSaver';
-import CharPicker from './CharPicker';
-import { getAllSavedWizardNames } from '../_lib/db';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import LevelUp from './LevelUp';
 import ClickTrick from './TrickClick';
 import BailOut from './BailOutButton';
 import TrickModal from './TrickModal';
-
-const CharControllerDiv = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
-    min-height: 30px;
-    gap: 10px;
-
-    @media all and (max-width: 899px) {
-        justify-content: center;
-    }
-`;
+import Warehouse from './Warehouse';
+import { Button } from './Buttons';
 
 const CharButtons = styled.div`
     display: flex;
+    gap: 10px;
+    width: 100%;
     justify-content: space-between;
-    gap: 50px;
-    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    button {
+        height: 35px;
+    }
+`;
+
+const WarehouseButton = styled(Button)`
+    text-align: center;
+    padding: 5px;
+    font-size: 0.9em;
+    height: 100%;
 `;
 
 const CharController = () => {
-    const [savedWizards, setSavedWizards] = useState<string[]>([]);
     const [showTrickModal, setShowTrickModal] = useState(false);
-
-    useEffect(() => {
-        setSavedWizards(getAllSavedWizardNames());
-    }, []);
+    const [showWarehouse, setShowWarehouse] = useState(false);
+    {
+        showTrickModal && <TrickModal onClose={() => setShowTrickModal(false)}></TrickModal>;
+    }
 
     return (
-        <CharControllerDiv>
+        <CharButtons>
             {showTrickModal && <TrickModal onClose={() => setShowTrickModal(false)}></TrickModal>}
-            <CharSaver setSavedWizards={setSavedWizards}></CharSaver>
-            <CharButtons>
-                <ClickTrick setShowTrickModal={setShowTrickModal}></ClickTrick>
-                <LevelUp></LevelUp>
-                <BailOut></BailOut>
-            </CharButtons>
-            <CharPicker savedWizards={savedWizards}></CharPicker>
-        </CharControllerDiv>
+            {showWarehouse && <Warehouse onClose={() => setShowWarehouse(false)}></Warehouse>}
+            <ClickTrick setShowTrickModal={setShowTrickModal}></ClickTrick>
+            <BailOut></BailOut>
+            <WarehouseButton onClick={() => setShowWarehouse(true)}>
+                Wizard Warehouse
+            </WarehouseButton>
+        </CharButtons>
     );
 };
 

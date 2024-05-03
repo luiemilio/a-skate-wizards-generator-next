@@ -8,6 +8,7 @@ const LevelUpDiv = styled.div`
     align-items: center;
     justify-content: space-around;
     gap: 5px;
+    width: 140px;
 `;
 
 const LevelIndicator = styled.div`
