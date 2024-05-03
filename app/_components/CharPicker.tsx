@@ -138,10 +138,6 @@ const CharPicker = ({ onClose }: { onClose: () => void }) => {
         }
     };
 
-    useEffect(() => {
-        updateSelectedWizard(savedWizards[0]);
-    });
-
     const onClick = (e: React.MouseEvent<HTMLLIElement>, wizard: string) => {
         updateSelectedWizard(wizard);
     };
@@ -168,8 +164,7 @@ const CharPicker = ({ onClose }: { onClose: () => void }) => {
             const idx = savedWizards.indexOf(selectedWizard);
             const newWizards = [...savedWizards.filter((wizard) => wizard !== selectedWizard)];
             setSavedWizards(newWizards);
-            setSelectedStats(undefined);
-            setSelectedWizard(newWizards[idx > 0 ? idx - 1 : 0]);
+            updateSelectedWizard(newWizards[idx > 0 ? idx - 1 : 0]);
 
             if (name === selectedWizard) {
                 setSaved(false);
@@ -180,6 +175,10 @@ const CharPicker = ({ onClose }: { onClose: () => void }) => {
             }
         }
     };
+
+    useEffect(() => {
+        updateSelectedWizard(savedWizards[0]);
+    }, [])
 
     return (
         <CharPickerDiv>
