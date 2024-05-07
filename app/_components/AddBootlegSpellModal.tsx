@@ -15,7 +15,7 @@ const AddBootlegSpellModalDiv = styled.div`
     background-color: white;
     justify-content: space-between;
     height: fit-content;
-`
+`;
 
 const AdderDiv = styled.div`
     background-color: white;
@@ -71,7 +71,7 @@ const AddBootlegSpellModal = ({ onClose }: { onClose: () => void }) => {
 
     const openAdder = () => {
         setShowBootlegSpellAdder(true);
-    }
+    };
 
     return (
         <Modal onClose={onClose}>

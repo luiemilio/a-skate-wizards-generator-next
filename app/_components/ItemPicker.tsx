@@ -93,7 +93,13 @@ const ItemPicker = ({ items, onItemAdd, title }: ItemPickerProps) => {
                 </SpellsUl>
                 <Description>{selectedItem.description}</Description>
             </Spells>
-            <AddButton onClick={() => { onItemAdd(selectedItem)}}>Add</AddButton>
+            <AddButton
+                onClick={() => {
+                    onItemAdd(selectedItem);
+                }}
+            >
+                Add
+            </AddButton>
         </ItemPickerDiv>
     );
 };

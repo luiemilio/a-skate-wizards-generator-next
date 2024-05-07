@@ -59,13 +59,13 @@ const AddEquipmentModal = ({ onClose }: { onClose: () => void }) => {
     return (
         <Modal onClose={onClose}>
             <MainDiv>
-                {showEquipmentAdder && (<EquipmentAdder onClose={onClose} addEquipment={addEquipment}/>)  }
-                <ItemPicker
-                    title='Add an equipment'
-                    items={ITEMS}
-                    onItemAdd={addEquipment}
-                />
-                <OpenEquipmentAdderButton onClick={openAdder}>Custom equipment?</OpenEquipmentAdderButton>
+                {showEquipmentAdder && (
+                    <EquipmentAdder onClose={onClose} addEquipment={addEquipment} />
+                )}
+                <ItemPicker title='Add an equipment' items={ITEMS} onItemAdd={addEquipment} />
+                <OpenEquipmentAdderButton onClick={openAdder}>
+                    Custom equipment?
+                </OpenEquipmentAdderButton>
             </MainDiv>
         </Modal>
     );

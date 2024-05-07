@@ -178,7 +178,7 @@ const CharPicker = ({ onClose }: { onClose: () => void }) => {
 
     useEffect(() => {
         updateSelectedWizard(savedWizards[0]);
-    }, [])
+    }, []);
 
     return (
         <CharPickerDiv>
