@@ -5,73 +5,57 @@ import { useContext, useState } from 'react';
 import { Button } from './Buttons';
 import { BOOTLEG_SPELLS } from '../_lib/constants';
 import type { Item, SavedItem } from '../_lib/utils';
+import ItemPicker from './ItemPicker';
+import ItemAdder from './ItemAdder';
 
-const AddBootlegSpellDiv = styled.div`
-    border: 5px solid black;
-    border-radius: 4px;
+const AddBootlegSpellModalDiv = styled.div`
     display: flex;
     flex-direction: column;
+    border: 5px solid black;
     background-color: white;
+    justify-content: space-between;
+    height: fit-content;
+`
+
+const AdderDiv = styled.div`
+    background-color: white;
+    border: 5px solid black;
+`;
+
+const BootlegSpellAdder = ({
+    onClose,
+    addBootlegSpell
+}: {
+    onClose: () => void;
+    addBootlegSpell: any;
+}) => {
+    return (
+        <Modal onClose={onClose}>
+            <AdderDiv>
+                <ItemAdder title='Enter bootleg spell' onItemAdd={addBootlegSpell} />
+            </AdderDiv>
+        </Modal>
+    );
+};
+
+const OpenBootlegSpellAdderButton = styled(Button)`
+    font-size: 0.9em;
     padding: 5px;
-    gap: 5px;
-`;
-
-const Header = styled.div`
-    align-self: center;
-    font-size: 1.5em;
-    font-weight: 600;
-`;
-
-const AddButton = styled(Button)`
     width: fit-content;
-    align-self: center;
-    padding: 5px;
-    font-size: 1em;
-`;
-
-const Spells = styled.div`
-    display: flex;
-`;
-
-const SpellsUl = styled.ul`
-    width: fit-content;
-    border: 1px solid black;
-    border-radius: 4px;
-    list-style-type: none;
-`;
-
-const SpellLi = styled.li<{ $selected?: boolean }>`
-    cursor: pointer;
-    border-radius: 4px;
-    padding-left: 10px;
-    padding-right: 10px;
-
-    &:hover {
-        background-color: ${(props) => (props.$selected ? 'gray' : 'lightgray')};
-    }
-
-    background-color: ${(props) => (props.$selected ? 'gray' : 'none')};
-`;
-
-const Description = styled.div`
-    width: 270px;
-    height: 180px;
-    padding: 0px 0px 0px 10px;
+    margin: 5px;
 `;
 
 const AddBootlegSpellModal = ({ onClose }: { onClose: () => void }) => {
     const { level, levelHistory, updateLevelHistory } = useContext(CharacterContext);
+    const [showBootlegSpellAdder, setShowBootlegSpellAdder] = useState(false);
 
-    const [selectedSpell, setSelectedSpell] = useState<Item>();
-    const [selectedDescription, setSelectedDescription] = useState<string>();
-
-    const addBootlegSpell = () => {
+    const addBootlegSpell = (spell: Item) => {
         const currentStats = levelHistory.get(level);
 
-        if (currentStats && selectedSpell) {
+        if (currentStats) {
             const { bootlegSpells } = currentStats;
             const newBootlegSpell = {
-                ...selectedSpell,
+                ...spell,
                 id: getNextId(bootlegSpells)
             };
             const newBootlegSpells = [...bootlegSpells, newBootlegSpell];
@@ -85,37 +69,25 @@ const AddBootlegSpellModal = ({ onClose }: { onClose: () => void }) => {
         onClose();
     };
 
-    const onClick = (e: React.MouseEvent<HTMLLIElement>, spell: Item) => {
-        setSelectedSpell(spell);
-        setSelectedDescription(spell.description);
-    };
+    const openAdder = () => {
+        setShowBootlegSpellAdder(true);
+    }
 
     return (
         <Modal onClose={onClose}>
-            <AddBootlegSpellDiv>
-                <Header>Pick a bootleg spell</Header>
-                <Spells>
-                    <SpellsUl>
-                        {BOOTLEG_SPELLS.map((spell) => {
-                            const { name } = spell;
-                            const key = `${name}-${Math.random() * 1000}`;
-
-                            return (
-                                <SpellLi
-                                    $selected={selectedSpell?.name === name}
-                                    onClick={(e: any) => onClick(e, spell)}
-                                    key={key}
-                                    value={name}
-                                >
-                                    {name}
-                                </SpellLi>
-                            );
-                        })}
-                    </SpellsUl>
-                    <Description>{selectedDescription}</Description>
-                </Spells>
-                <AddButton onClick={addBootlegSpell}>Add</AddButton>
-            </AddBootlegSpellDiv>
+            <AddBootlegSpellModalDiv>
+                {showBootlegSpellAdder && (
+                    <BootlegSpellAdder onClose={onClose} addBootlegSpell={addBootlegSpell} />
+                )}
+                <ItemPicker
+                    title='Add Bootleg Spell'
+                    items={BOOTLEG_SPELLS}
+                    onItemAdd={addBootlegSpell}
+                />
+                <OpenBootlegSpellAdderButton onClick={openAdder}>
+                    Custom bootleg spell?
+                </OpenBootlegSpellAdderButton>
+            </AddBootlegSpellModalDiv>
         </Modal>
     );
 };

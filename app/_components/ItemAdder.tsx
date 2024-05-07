@@ -1,23 +1,20 @@
 import styled from 'styled-components';
-import { CharacterContext, Item, getNextId, textFont } from '../_lib/utils';
-import Modal from './Modal';
-import { useContext, useState } from 'react';
+import { Item, textFont } from '../_lib/utils';
+import { useState } from 'react';
 import { Button } from './Buttons';
 
-interface AddItemModalProps {
-    onClose: () => void;
+interface ItemAdderProps {
     onItemAdd: (item: Item) => void;
     title: string;
 }
 
 const AddItemDiv = styled.div`
-    border: 5px solid black;
-    border-radius: 4px;
     display: flex;
     flex-direction: column;
     background-color: white;
     padding: 5px;
     gap: 5px;
+    height: 330px;
 `;
 
 const Header = styled.div`
@@ -50,7 +47,7 @@ const DescriptionInput = styled.textarea`
     border-radius: 4px;
 `;
 
-const ItemAdder = ({ onItemAdd, title }: AddItemModalProps) => {
+const ItemAdder = ({ onItemAdd, title }: ItemAdderProps) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 

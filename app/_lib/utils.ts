@@ -4,7 +4,6 @@ import localFont from 'next/font/local';
 import { ITEMS, RANDO_SPELLS, BOOTLEG_SPELLS, STARTING_STATS, PERMANENT_SPELLS } from './constants';
 
 export type Item = {
-    uuid?: string;
     name: string;
     description?: string;
 };
