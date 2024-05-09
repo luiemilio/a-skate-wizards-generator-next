@@ -11,7 +11,7 @@ const ModalOverlay = styled.div`
     top: 0;
     left: 0;
     right: 0;
-    min-width: 450px;
+    min-width: 460px;
     min-height: 2310px;
     background-color: rgba(0, 0, 0, 0.5);
     margin: 0 auto;
