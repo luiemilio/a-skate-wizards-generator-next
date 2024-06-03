@@ -7,7 +7,7 @@ import {
     normalizePropName
 } from '../_lib/utils';
 import React, { useContext, useEffect, useState } from 'react';
-import { deleteWizard, getLevelHistory } from '../_lib/db';
+import { deleteWizard, getSaveInfo } from '../_lib/db';
 import { Button } from './Buttons';
 
 const CharPickerDiv = styled.div`
@@ -118,19 +118,19 @@ const Buttons = styled.div`
 
 const CharPicker = ({ onClose }: { onClose: () => void }) => {
     const { savedWizards, setSavedWizards } = useContext(SavedWizardsContext);
-    const { setLevel, replaceLevelHistory, name, setName, setSaved } = useContext(CharacterContext);
+    const { setLevel, replaceLevelHistory, name, setName, setSaved, setCurrentStats } = useContext(CharacterContext);
     const [selectedWizard, setSelectedWizard] = useState<string>();
     const [selectedStats, setSelectedStats] = useState<(Stats & { level: number }) | undefined>();
 
     const updateSelectedWizard = (wizard: string) => {
         setSelectedWizard(wizard);
 
-        const levelHistory = getLevelHistory(wizard);
+        const saveInfo = getSaveInfo(wizard);
 
-        if (levelHistory) {
-            const levels = Array.from(levelHistory.keys());
+        if (saveInfo?.levelHistory) {
+            const levels = Array.from(saveInfo.levelHistory.keys());
             const level = Math.max(...levels);
-            const stats = levelHistory.get(level);
+            const stats = saveInfo.levelHistory.get(level);
 
             if (level && stats) {
                 setSelectedStats({ level, ...stats });
@@ -144,14 +144,19 @@ const CharPicker = ({ onClose }: { onClose: () => void }) => {
 
     const handleLoad = () => {
         if (selectedWizard) {
-            const levelHistory = getLevelHistory(selectedWizard);
+            const saveInfo = getSaveInfo(selectedWizard);
+            
+            if (saveInfo) {
+                const { levelHistory, currentStats } = saveInfo;
 
-            if (levelHistory) {
-                const levels = Array.from(levelHistory.keys());
-                const maxLevel = Math.max(...levels);
-                setLevel(maxLevel);
-                replaceLevelHistory(levelHistory);
-                setName(selectedWizard);
+                if (levelHistory && currentStats) {
+                    const levels = Array.from(levelHistory.keys());
+                    const maxLevel = Math.max(...levels);
+                    setLevel(maxLevel);
+                    replaceLevelHistory(levelHistory);
+                    setName(selectedWizard);
+                    setCurrentStats(currentStats);
+                }
             }
 
             onClose();

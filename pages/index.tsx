@@ -7,7 +7,8 @@ import {
     Stats,
     getRandomStats,
     textFont,
-    titleFont
+    titleFont,
+    CurrentStats
 } from '../app/_lib/utils';
 import StatusBar from '@/app/_components/StatusBar';
 import Character from '@/app/_components/Character';
@@ -116,6 +117,7 @@ const Generator = () => {
     const [name, setName] = useState('');
     const [savedWizards, setSavedWizards] = useState<string[]>([]);
     const [saved, setSaved] = useState<boolean>(false);
+    const [currentStats, setCurrentStats] = useState<CurrentStats>({});
 
     const updateLevelHistory = (level: number, stats: Stats) => {
         setLevelHistory(new Map(levelHistory.set(level, stats)));
@@ -127,11 +129,17 @@ const Generator = () => {
 
     useEffect(() => {
         const initialStats = getRandomStats();
+        const { hp, defense, attackBonus } = initialStats;
         const initialLevelMap = new Map([[1, initialStats]]);
         const savedWizards = getAllSavedWizardNames();
 
         setLevelHistory(initialLevelMap);
         setSavedWizards(savedWizards);
+        setCurrentStats({
+            hp,
+            defense,
+            attackBonus
+        });
     }, []);
 
     useEffect(() => {
@@ -157,7 +165,9 @@ const Generator = () => {
                     levelling,
                     setLevelling,
                     saved,
-                    setSaved
+                    setSaved,
+                    currentStats,
+                    setCurrentStats
                 }}
             >
                 <Main className={textFont.className}>

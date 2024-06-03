@@ -55,7 +55,16 @@ export interface Stats {
     equipment: SavedItem[];
 }
 
+export type CurrentStatTypes = 'hp' | 'defense' | 'attackBonus';
+
+export type CurrentStats = Partial<Pick<Stats, CurrentStatTypes>>;
+
 export type LevelHistory = Map<number, Stats>;
+
+export interface SaveInfo {
+    levelHistory: LevelHistory;
+    currentStats: CurrentStats;
+}
 
 export interface CharacterContext {
     name: string;
@@ -69,6 +78,8 @@ export interface CharacterContext {
     setLevelling: Dispatch<SetStateAction<boolean>>;
     saved: boolean;
     setSaved: Dispatch<SetStateAction<boolean>>;
+    currentStats: CurrentStats;
+    setCurrentStats: Dispatch<SetStateAction<CurrentStats>>;
 }
 
 export interface SavedWizardsContext {
@@ -89,7 +100,9 @@ export const CharacterContext = createContext({
     levelling: false,
     setLevelling: () => {},
     saved: false,
-    setSaved: () => {}
+    setSaved: () => {},
+    currentStats: {},
+    setCurrentStats: () => {},
 } as CharacterContext);
 
 export const SavedWizardsContext = createContext({
@@ -236,12 +249,12 @@ const reviver = (_: any, value: any): any => {
         : value;
 };
 
-export const stringifyLevelHistory = (levelHistory: LevelHistory): string => {
-    return JSON.stringify(levelHistory, replacer);
+export const stringifySaveInfo = (savedStats: SaveInfo): string => {
+    return JSON.stringify(savedStats, replacer);
 };
 
-export const parseLevelHistory = (stringifiedLevelHistory: string): LevelHistory => {
-    return JSON.parse(stringifiedLevelHistory, reviver);
+export const parseSaveInfo = (stringifiedSaveInfo: string): SaveInfo => {
+    return JSON.parse(stringifiedSaveInfo, reviver);
 };
 
 export const getNextId = (items: SavedItem[]): number => {

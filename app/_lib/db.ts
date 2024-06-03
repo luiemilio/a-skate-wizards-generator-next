@@ -1,27 +1,27 @@
-import { LevelHistory, parseLevelHistory, stringifyLevelHistory } from './utils';
+import { CurrentStats, LevelHistory, SaveInfo, parseSaveInfo, stringifySaveInfo } from './utils';
 
 const NAME_PREFIX = 'wizard-';
 
 const hasLocalStorage = typeof window !== 'undefined' && window?.localStorage;
 
-export const save = (name: string, levelHistory: LevelHistory): void => {
+export const save = (name: string, levelHistory: LevelHistory, currentStats: CurrentStats): void => {
     if (hasLocalStorage) {
         const storedName = `${NAME_PREFIX}${name}`;
 
-        localStorage.setItem(storedName, stringifyLevelHistory(levelHistory));
+        localStorage.setItem(storedName, stringifySaveInfo({ levelHistory, currentStats }));
     }
 };
 
-export const getLevelHistory = (name: string): LevelHistory | undefined => {
+export const getSaveInfo = (name: string): SaveInfo | undefined => {
     if (hasLocalStorage) {
         const storedName = `${NAME_PREFIX}${name}`;
-        const stringifiedLevelHistory = localStorage.getItem(storedName);
+        const stringifiedSavedStats = localStorage.getItem(storedName);
 
-        if (!stringifiedLevelHistory) {
+        if (!stringifiedSavedStats) {
             return undefined;
         }
 
-        return parseLevelHistory(stringifiedLevelHistory);
+        return parseSaveInfo(stringifiedSavedStats);
     }
 };
 

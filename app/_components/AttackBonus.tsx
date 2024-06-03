@@ -13,11 +13,11 @@ const AttackBonusDiv = styled.div`
 const AttackBonusInfo = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 50px;
+    width: 60px;
 `;
 
 const AttackBonus = () => {
-    const { level, levelling, levelHistory, setLevelling, updateLevelHistory } =
+    const { level, levelling, levelHistory, setLevelling, updateLevelHistory, currentStats, setCurrentStats } =
         useContext(CharacterContext);
 
     const [attackBonus, setAttackBonus] = useState(0);

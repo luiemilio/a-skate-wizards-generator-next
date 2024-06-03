@@ -1,22 +1,18 @@
 'use client';
 import { useContext, useEffect, useState } from 'react';
 import AttackBonus from './AttackBonus';
-import { CharacterContext } from '../_lib/utils';
+import { CharacterContext, CurrentStatTypes, CurrentStats, textFont } from '../_lib/utils';
 import styled from 'styled-components';
 import Abilities from './Abilities';
-import LevelUp from './LevelUp';
 
 const StatusDiv = styled.div`
     display: flex;
-    flex-direction: column;
     border-top: 3px solid black;
     border-bottom: 3px solid black;
     padding: 10px;
     width: 100%;
     min-width: 450px;
-    align-items: center;
-    justify-content: space-evenly;
-    gap: 5px;
+
     * {
         font-size: 1em;
     }
@@ -28,6 +24,7 @@ const Status = styled.div`
     justify-content: center;
     align-items: flex-start;
     width: 180px;
+    gap: 5px;
 
     * {
         padding: 0px;
@@ -37,28 +34,64 @@ const Status = styled.div`
 const StatusInfo = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
+    height: 30px;
+    gap: 5px;
 `;
 
 const BufferDiv = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 50px;
+    align-items: center;
+    width: 60px;
 `;
 
-const StatusIndicator = ({ hp, defense }: any) => {
+const StatusInput = styled.input`
+    width: 25px;
+    height: 22px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 4px;
+`;
+
+const StatusNameP = styled.p`
+    width: 116px;
+`;
+
+const StatusIndicator = () => {
+    const { currentStats, setCurrentStats, levelHistory, level } = useContext(CharacterContext);
+
+    const updateState = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const currentTarget = e.currentTarget;
+        const stat = currentTarget.id as CurrentStatTypes;
+        const value = parseInt(currentTarget.value);
+
+        if (stat && value) {
+            const newCurrentStats = { ...currentStats };
+            newCurrentStats[stat] = value;
+            setCurrentStats(newCurrentStats);
+        }
+    };
+
     return (
         <Status>
             <StatusInfo>
-                <p>HP</p>
+                <StatusNameP>HP</StatusNameP>
                 <BufferDiv>
-                    <p>{hp}</p>
+                    <StatusInput
+                        className={textFont.className}
+                        id='hp'
+                        defaultValue={currentStats.hp}
+                        onChange={updateState}
+                    />
+                    <p>/ {levelHistory.get(level)?.hp}</p>
                 </BufferDiv>
             </StatusInfo>
             <StatusInfo>
-                <p>Defense</p>
+                <StatusNameP>Defense</StatusNameP>
                 <BufferDiv>
-                    <p>{defense}</p>
+                    <p>{levelHistory.get(level)?.defense}</p>
                 </BufferDiv>
             </StatusInfo>
             <AttackBonus />
@@ -76,32 +109,16 @@ const AbilitiesDiv = () => {
 
 const Stats = styled.div`
     display: flex;
-    gap: 10px;
-    justify-content: space-evenly;
+    justify-content: space-around;
     width: 100%;
 `;
 
 const StatusBar = () => {
-    const { levelHistory, level, levelling, name } = useContext(CharacterContext);
-    const [hp, setHp] = useState(0);
-    const [defense, setDefense] = useState(0);
-
-    useEffect(() => {
-        const stats = levelHistory.get(level);
-
-        if (stats) {
-            const { hp, defense } = stats;
-
-            setHp(hp);
-            setDefense(defense);
-        }
-    }, [level, levelHistory, levelling]);
-
     return (
         <StatusDiv>
             <Stats>
                 <AbilitiesDiv />
-                <StatusIndicator hp={hp} defense={defense} />
+                <StatusIndicator />
             </Stats>
         </StatusDiv>
     );
