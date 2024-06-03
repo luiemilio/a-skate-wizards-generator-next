@@ -118,7 +118,8 @@ const Buttons = styled.div`
 
 const CharPicker = ({ onClose }: { onClose: () => void }) => {
     const { savedWizards, setSavedWizards } = useContext(SavedWizardsContext);
-    const { setLevel, replaceLevelHistory, name, setName, setSaved, setCurrentStats } = useContext(CharacterContext);
+    const { setLevel, replaceLevelHistory, name, setName, setSaved, setCurrentStats } =
+        useContext(CharacterContext);
     const [selectedWizard, setSelectedWizard] = useState<string>();
     const [selectedStats, setSelectedStats] = useState<(Stats & { level: number }) | undefined>();
 
@@ -145,7 +146,7 @@ const CharPicker = ({ onClose }: { onClose: () => void }) => {
     const handleLoad = () => {
         if (selectedWizard) {
             const saveInfo = getSaveInfo(selectedWizard);
-            
+
             if (saveInfo) {
                 const { levelHistory, currentStats } = saveInfo;
 

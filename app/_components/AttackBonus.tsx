@@ -17,8 +17,15 @@ const AttackBonusInfo = styled.div`
 `;
 
 const AttackBonus = () => {
-    const { level, levelling, levelHistory, setLevelling, updateLevelHistory, currentStats, setCurrentStats } =
-        useContext(CharacterContext);
+    const {
+        level,
+        levelling,
+        levelHistory,
+        setLevelling,
+        updateLevelHistory,
+        currentStats,
+        setCurrentStats
+    } = useContext(CharacterContext);
 
     const [attackBonus, setAttackBonus] = useState(0);
 

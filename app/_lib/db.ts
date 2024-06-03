@@ -4,7 +4,11 @@ const NAME_PREFIX = 'wizard-';
 
 const hasLocalStorage = typeof window !== 'undefined' && window?.localStorage;
 
-export const save = (name: string, levelHistory: LevelHistory, currentStats: CurrentStats): void => {
+export const save = (
+    name: string,
+    levelHistory: LevelHistory,
+    currentStats: CurrentStats
+): void => {
     if (hasLocalStorage) {
         const storedName = `${NAME_PREFIX}${name}`;
 

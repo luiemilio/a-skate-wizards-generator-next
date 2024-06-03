@@ -39,7 +39,8 @@ const SaveButton = styled(Button)<{ $disabled?: boolean }>`
 `;
 
 const CharSaver = () => {
-    const { name, setName, levelHistory, setSaved, saved, currentStats } = useContext(CharacterContext);
+    const { name, setName, levelHistory, setSaved, saved, currentStats } =
+        useContext(CharacterContext);
     const { savedWizards, setSavedWizards } = useContext(SavedWizardsContext);
     const [currentInput, setCurrentInput] = useState('');
 

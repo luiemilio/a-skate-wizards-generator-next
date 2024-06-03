@@ -102,7 +102,7 @@ export const CharacterContext = createContext({
     saved: false,
     setSaved: () => {},
     currentStats: {},
-    setCurrentStats: () => {},
+    setCurrentStats: () => {}
 } as CharacterContext);
 
 export const SavedWizardsContext = createContext({
